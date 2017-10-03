@@ -114,6 +114,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    public void updatePersonTags(Person person, Tag tag) {
+        Set<Tag> tags = person.getTags();
+        tags.remove(tag);
+        person.setTags(tags);
+    }
+
     /**
      * Ensures that every tag in this person:
      *  - exists in the master list {@link #tags}
@@ -160,6 +166,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
+    }
+
+    public void removeTag(Tag tag) throws PersonNotFoundException, DuplicatePersonException{
+        for(Person oldPerson : persons){
+            Person personToUpdate = new Person(oldPerson);
+            this.updatePersonTags(personToUpdate, tag);
+            this.updatePerson(oldPerson, personToUpdate);
+        }
     }
 
     //// util methods
