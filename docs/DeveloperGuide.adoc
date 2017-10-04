@@ -816,6 +816,7 @@ Use case resumes at step 2.
 .  Should not have any unhandled exceptions from wrong user input.
 .  Should be easy to install by user without any assistance.
 .  Should have consistent display formats for all commands.
+
 {More to be added}
 
 [appendix]
