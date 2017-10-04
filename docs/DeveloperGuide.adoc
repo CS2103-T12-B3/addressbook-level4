@@ -807,7 +807,15 @@ Use case resumes at step 2.
 .  Should work on any link:#mainstream-os[mainstream OS] as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+.  Should not use more than 5 sec as a start up time.
+.  Should respond within 1 sec of giving a command.
+.  Should use at most 4 mb of memory.
+.  Should not take more than 10 minutes for user to learn to use the system.
+.  Should not use more than 30 % of CPU resources during command execution.
+.  Should display all entries in a list perfectly correctly on every command.
+.  Should not have any unhandled exceptions from wrong user input.
+.  Should be easy to install by user without any assistance.
+.  Should have consistent display formats for all commands.
 {More to be added}
 
 [appendix]
