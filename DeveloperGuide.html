@@ -78,7 +78,13 @@
 </ul>
 </li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
-<li><a href="#use-cases">Appendix C: Use Cases</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-find-contact-s-birthday">C.1. Use case: Find contact&#8217;s birthday</a></li>
+<li><a href="#use-case-list-people-with-a-specific-tag">C.2. Use case: List people with a specific tag</a></li>
+<li><a href="#use-case-sort-contacts-by-name">C.3. Use case: Sort contacts by name</a></li>
+</ul>
+</li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
 <li><a href="#product-survey">Appendix F: Product Survey</a></li>
@@ -1749,6 +1755,12 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have different colored tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily differentiate people based on different tags</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default</p></td>
@@ -1765,6 +1777,18 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">auto-format phone number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">easily figure out the country code or phone number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a picture of the person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">make it easier for myself to identify the person</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find contacts in runtime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find contacts without typing the entire name</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -1785,10 +1809,52 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">group relevant contacts together</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see the contact details in grid view</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find information faster</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a picture of the person</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">make it easier for myself to identify the person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sync contacts from online services like facebook,google etc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add contacts directly without entering them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add prefix to name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assign proper designation to each name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add deadlines</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">so that I can finish tasks on time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use google maps to show me the address of person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">navigate to that address</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add homepage for the person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see the persons further details or publications if need be</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add notes to a person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add extra information about that person</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add twitter id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remain updated with their twitter posts</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -1801,6 +1867,24 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enter the location for storage file</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">store my contacts anywhere I want</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see the emails or messages exchanged with person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see the history of interaction with the person</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">receive notification for birthday</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">call or text the person to wish him/her</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have alternate themes for the app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">change look of the app if I get bored with one theme</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -1900,8 +1984,127 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="use-case-find-contact-s-birthday"><a class="link" href="#use-case-find-contact-s-birthday">C.1. Use case: Find contact&#8217;s birthday</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User searches for specific person.</p>
+</li>
+<li>
+<p>AddressBook shows the person for the user.</p>
+</li>
+<li>
+<p>User checks person&#8217;s birthday.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The searched person is not in the AddressBook.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. Steps 1-2 are repeated as long as the person is not found.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-list-people-with-a-specific-tag"><a class="link" href="#use-case-list-people-with-a-specific-tag">C.2. Use case: List people with a specific tag</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User specifies the tag she wants to be searched.</p>
+</li>
+<li>
+<p>The AddressBook shows the contacts with the searched tag.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The person types the tag incorrectly and no contacts are found.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. Steps 1-2 are repeated as long as the tag is typed incorrectly.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-sort-contacts-by-name"><a class="link" href="#use-case-sort-contacts-by-name">C.3. Use case: Sort contacts by name</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User lists all the contacts.</p>
+</li>
+<li>
+<p>AddressBook shows the contacts in the order they were added to the AddressBook.</p>
+</li>
+<li>
+<p>User sorts the contacts.</p>
+</li>
+<li>
+<p>AddressBook lists all the contacts sorted by the their name.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. There are no contacts.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>{More to be added}</p>
+</div>
 </div>
 </div>
 </div>
@@ -2014,7 +2217,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-05 04:51:32 +00:00
+Last updated 2017-10-05 04:51:48 +00:00
 </div>
 </div>
 </body>
