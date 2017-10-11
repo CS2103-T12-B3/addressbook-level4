@@ -78,6 +78,16 @@
 </ul>
 </li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-find-contact-s-birthday">C.1. Use case: Find contact&#8217;s birthday</a></li>
+<li><a href="#use-case-list-people-with-a-specific-tag">C.2. Use case: List people with a specific tag</a></li>
+<li><a href="#use-case-sort-contacts-by-name">C.3. Use case: Sort contacts by name</a></li>
+</ul>
+</li>
+<li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
+<li><a href="#glossary">Appendix E: Glossary</a></li>
+<li><a href="#product-survey">Appendix F: Product Survey</a></li>
 </ul>
 </div>
 </div>
@@ -1916,120 +1926,304 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add a person with incomplete details</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add a person and fill incomplete entries later
-</p><p class="tableblock">{More to be added}
-</p><p class="tableblock">[appendix]
-== Use Cases
-</p><p class="tableblock">(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)
-</p><p class="tableblock">[discrete]
-=== Use case: Delete person
-</p><p class="tableblock"><strong>MSS</strong>
-</p><p class="tableblock">1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-+
-Use case ends.
-</p><p class="tableblock"><strong>Extensions</strong>
-</p><p class="tableblock">[none]
-* 2a. The list is empty.
-+
-Use case ends.
-</p><p class="tableblock">* 3a. The given index is invalid.
-+
-[none]
-<strong> 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
-</p><p class="tableblock">=== Use case: Find contact&#8217;s birthday
-</p><p class="tableblock"><strong>MSS</strong>
-</p><p class="tableblock">1.  User searches for specific person.
-2.  AddressBook shows the person for the user.
-3.  User checks person&#8217;s birthday.
-+
-Use case ends.
-</p><p class="tableblock"><strong>Extensions</strong>
-</p><p class="tableblock">[none]
-* 2a. The searched person is not in the AddressBook.
-+
-[none]
-</strong> 2a1. Steps 1-2 are repeated as long as the person is not found.
-+
-Use case resumes from step 3.
-</p><p class="tableblock">=== Use case: List people with a specific tag
-</p><p class="tableblock"><strong>MSS</strong>
-</p><p class="tableblock">1.  User specifies the tag she wants to be searched.
-2.  The AddressBook shows the contacts with the searched tag.
-+
-Use case ends.
-</p><p class="tableblock"><strong>Extensions</strong>
-</p><p class="tableblock">[none]
-* 2a. The person types the tag incorrectly and no contacts are found.
-+
-[none]
-<strong>* 2a1. Steps 1-2 are repeated as long as the tag is typed incorrectly.
-+
-Use case ends.
-</p><p class="tableblock">=== Use case: Sort contacts by name
-</p><p class="tableblock">*MSS</strong>
-</p><p class="tableblock">1.  User lists all the contacts.
-2.  AddressBook shows the contacts in the order they were added to the AddressBook.
-3.  User sorts the contacts.
-4.  AddressBook lists all the contacts sorted by the their name.
-+
-Use case ends.
-</p><p class="tableblock"><strong>Extensions</strong>
-</p><p class="tableblock">[none]
-* 2a. There are no contacts.
-+
-Use case ends.
-</p><p class="tableblock">{More to be added}
-</p><p class="tableblock">[appendix]
-== Non Functional Requirements
-</p><p class="tableblock">.  Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>1.8.0_60</code> or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-.  Should not use more than 5 sec as a start up time.
-.  Should respond within 1 sec of giving a command.
-.  Should use at most 4 mb of memory.
-.  Should not take more than 10 minutes for user to learn to use the system.
-.  Should not use more than 30 % of CPU resources during command execution.
-.  Should display all entries in a list perfectly correctly on every command.
-.  Should not have any unhandled exceptions from wrong user input.
-.  Should be easy to install by user without any assistance.
-.  Should have consistent display formats for all commands.
-</p><p class="tableblock">{More to be added}
-</p><p class="tableblock">[appendix]
-== Glossary
-</p><p class="tableblock"><a id="mainstream-os"></a>
-Mainstream OS
-</p><p class="tableblock">&#8230;&#8203;.
-Windows, Linux, Unix, OS-X
-&#8230;&#8203;.
-</p><p class="tableblock"><a id="private-contact-detail"></a>
-Private contact detail
-</p><p class="tableblock">&#8230;&#8203;.
-A contact detail that is not meant to be shared with others
-&#8230;&#8203;.
-</p><p class="tableblock">[appendix]
-== Product Survey
-</p><p class="tableblock"><strong>Product Name</strong>
-</p><p class="tableblock">Author: &#8230;&#8203;
-</p><p class="tableblock">Pros:
-</p><p class="tableblock">* &#8230;&#8203;
-* &#8230;&#8203;
-</p><p class="tableblock">Cons:
-</p><p class="tableblock">* &#8230;&#8203;
-* &#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add a person and fill incomplete entries later</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>{More to be added}</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+</div>
+<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to list persons</p>
+</li>
+<li>
+<p>AddressBook shows a list of persons</p>
+</li>
+<li>
+<p>User requests to delete a specific person in the list</p>
+</li>
+<li>
+<p>AddressBook deletes the person</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given index is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. AddressBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-contact-s-birthday"><a class="link" href="#use-case-find-contact-s-birthday">C.1. Use case: Find contact&#8217;s birthday</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User searches for specific person.</p>
+</li>
+<li>
+<p>AddressBook shows the person for the user.</p>
+</li>
+<li>
+<p>User checks person&#8217;s birthday.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The searched person is not in the AddressBook.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. Steps 1-2 are repeated as long as the person is not found.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-list-people-with-a-specific-tag"><a class="link" href="#use-case-list-people-with-a-specific-tag">C.2. Use case: List people with a specific tag</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User specifies the tag she wants to be searched.</p>
+</li>
+<li>
+<p>The AddressBook shows the contacts with the searched tag.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The person types the tag incorrectly and no contacts are found.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. Steps 1-2 are repeated as long as the tag is typed incorrectly.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-sort-contacts-by-name"><a class="link" href="#use-case-sort-contacts-by-name">C.3. Use case: Sort contacts by name</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User lists all the contacts.</p>
+</li>
+<li>
+<p>AddressBook shows the contacts in the order they were added to the AddressBook.</p>
+</li>
+<li>
+<p>User sorts the contacts.</p>
+</li>
+<li>
+<p>AddressBook lists all the contacts sorted by the their name.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. There are no contacts.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>{More to be added}</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>1.8.0_60</code> or higher installed.</p>
+</li>
+<li>
+<p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>Should not use more than 5 sec as a start up time.</p>
+</li>
+<li>
+<p>Should respond within 1 sec of giving a command.</p>
+</li>
+<li>
+<p>Should use at most 4 mb of memory.</p>
+</li>
+<li>
+<p>Should not take more than 10 minutes for user to learn to use the system.</p>
+</li>
+<li>
+<p>Should not use more than 30 % of CPU resources during command execution.</p>
+</li>
+<li>
+<p>Should display all entries in a list perfectly correctly on every command.</p>
+</li>
+<li>
+<p>Should not have any unhandled exceptions from wrong user input.</p>
+</li>
+<li>
+<p>Should be easy to install by user without any assistance.</p>
+</li>
+<li>
+<p>Should have consistent display formats for all commands.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>{More to be added}</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
+<div class="sectionbody">
+<div id="mainstream-os" class="paragraph">
+<p>Mainstream OS</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Windows, Linux, Unix, OS-X</pre>
+</div>
+</div>
+<div id="private-contact-detail" class="paragraph">
+<p>Private contact detail</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>A contact detail that is not meant to be shared with others</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Product Name</strong></p>
+</div>
+<div class="paragraph">
+<p>Author: &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-11 11:18:02 +00:00
+Last updated 2017-10-11 12:21:54 +00:00
 </div>
 </div>
 </body>
