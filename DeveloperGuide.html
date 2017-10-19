@@ -45,8 +45,10 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
-<li><a href="#logging">3.2. Logging</a></li>
-<li><a href="#configuration">3.3. Configuration</a></li>
+<li><a href="#sort-mechanism">3.2. Sort mechanism</a></li>
+<li><a href="#logging">3.3. Logging</a></li>
+<li><a href="#birthday-attribute">3.4. Birthday attribute</a></li>
+<li><a href="#configuration">3.5. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -773,7 +775,41 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.2. Logging</a></h3>
+<h3 id="sort-mechanism"><a class="link" href="#sort-mechanism">3.2. Sort mechanism</a></h3>
+<div class="paragraph">
+<p>The sort mechanism is facilitated by an <code>Event</code>. When a sort command is executed, the sort command will conduct a sort on the current <code>list</code> in the address book based on the full name in alphabetical order.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the sort operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortCommandSequenceDiagram.png" alt="SortCommandSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarize what happens inside the <code>Sort Command</code> when a user executes the command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortCommandActivityDiagram.png" alt="SortCommandActivityDiagram" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>SortCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> Sort list by triggering an event to sort the current ObservableList&lt;ReadOnlyPerson&gt; person list.<br>
+<strong>Pros:</strong> We will not make any changes to the current <code>internalList</code> thus will not affect any other commands that we have implemented.<br>
+<strong>Cons:</strong> Hard for new developers to understand the way we sort the read only person list.<br>
+<strong>Alternative 2:</strong> Just sort the <code>internalList</code><br>
+<strong>Pros:</strong> Does not involve the <code>ObservableList</code>, easier for new developers to understand.<br>
+<strong>Cons:</strong> Changes made to the <code>internalList</code> might affect other existing commands.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -811,7 +847,38 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.3. Configuration</a></h3>
+<h3 id="birthday-attribute"><a class="link" href="#birthday-attribute">3.4. Birthday attribute</a></h3>
+<div class="paragraph">
+<p>Person class consists of five different attributes: <code>Name</code>, <code>Address</code>, <code>Phone</code>, <code>Email</code> and <code>Birthday</code>. Birthday class has a very similar implementation compared to the other attribute classes. New instance of Birthday is initialized by giving the constructor the parameter birthday in String format. The parameter is required to be non-null, and it is first validated before accepting it as a birthday value for the class.</p>
+</div>
+<div class="paragraph">
+<p><strong>Validation</strong></p>
+</div>
+<div class="paragraph">
+<p>The valid form for a birthday string is <code>DD/MM/YYYY</code>, where every character must be a digit except for the slashes. This validation is performed to prohibit the user from inputting something completely peculiar, for example a string of spaces or a long sequence of characters.</p>
+</div>
+<div class="paragraph">
+<p>Examples for a valid birthday:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>14/12/1993</code></p>
+</li>
+<li>
+<p><code>22/02/2001</code></p>
+</li>
+<li>
+<p><code>99/99/9999</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Notice that the current implementation doesn&#8217;t validate the validity of the date, only the format of the birthday and this was a conscious decision. This implementation manages to preserve the simplicity of this class. It could have been possible to use for example Java&#8217;s Date class to implement a second validator for also the date, but this would have created inconsistency between the other attribute classes. Also, because the end product is an address book which only has to store the birthday, the validity of the date is not a concern for the program.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration"><a class="link" href="#configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2209,7 +2276,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-19 02:48:08 +00:00
+Last updated 2017-10-19 02:55:30 +00:00
 </div>
 </div>
 </body>
