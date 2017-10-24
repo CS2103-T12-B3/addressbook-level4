@@ -1,11 +1,15 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Random;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -17,7 +21,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static String[] colors = {"red", "yellow", "green", "blue", "pink", "grey", "orange", "brown", "black"};
+    private static String[] colors = {"red", "green", "blue", "pink", "grey", "orange", "brown", "black"};
     private static HashMap<String, String> tagColors = new HashMap<>();
     private static Random random = new Random();
 
@@ -33,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private ImageView photo;
     @FXML
     private Label name;
     @FXML
@@ -54,6 +60,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         initTags(person);
         bindListeners(person);
+        initPhoto(person);
     }
 
     private static String getColorForTag(String tagValue) {
@@ -87,6 +94,23 @@ public class PersonCard extends UiPart<Region> {
             tagLabel.setStyle("-fx-background-color: " + getColorForTag(tag.tagName));
             tags.getChildren().add(tagLabel);
         });
+    }
+
+    private void initPhoto(ReadOnlyPerson person) {
+        try{
+            if(person.getPhoto() != null) {
+                File photoFile = new File(person.getPhoto().getFullPhotoDir());
+                FileInputStream fileStream = new FileInputStream(photoFile);
+                Image personPhoto = new Image(fileStream);
+                photo = new ImageView(personPhoto);
+                photo.setFitHeight(person.getPhoto().HEIGHT);
+                photo.setFitWidth(person.getPhoto().WIDTH);
+                cardPane.getChildren().add(photo);
+            }
+        } catch (Exception e) {
+            System.out.println("Image not found");
+        }
+
     }
 
     @Override
