@@ -38,12 +38,11 @@
 <li><a href="#listing-entered-commands-code-history-code">2.9. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">2.10. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">2.11. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#add-an-image-of-a-person-code-image-code">2.12. Add an image of a person : <code>image</code></a></li>
-<li><a href="#loading-pre-existing-address-book-code-load-code">2.13. Loading pre-existing address book : <code>load</code></a></li>
-<li><a href="#setting-password-for-the-address-book-code-password-code">2.14. Setting password for the address book: <code>password</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">2.15. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">2.16. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">2.17. Saving the data</a></li>
+<li><a href="#loading-pre-existing-address-book-code-load-code">2.12. Loading pre-existing address book : <code>load</code></a></li>
+<li><a href="#setting-password-for-the-address-book-code-password-code">2.13. Setting password for the address book: <code>password</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">2.14. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">2.15. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">2.16. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">3. FAQ</a></li>
@@ -98,7 +97,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all contacts</p>
 </li>
 <li>
-<p><strong><code>add</code></strong> <code>n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>add</code></strong> <code>n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993 pt/JohnDoe.jpg</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
@@ -152,7 +151,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">2.2. Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY pt/PHOTO [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -172,10 +171,10 @@ A person can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13/02/1998</code></p>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13/02/1998 pt/JohnDoe.jpg</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/08/08/2008 t/criminal</code></p>
+<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/08/08/2008 pt/BetsyC.png t/criminal</code></p>
 </li>
 </ul>
 </div>
@@ -214,7 +213,7 @@ Format: <code>sort</code></p>
 <h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">2.5. Editing a person : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing person in the address book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [pt/PHOTO] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -485,28 +484,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-an-image-of-a-person-code-image-code"><a class="link" href="#add-an-image-of-a-person-code-image-code">2.12. Add an image of a person : <code>image</code></a></h3>
-<div class="paragraph">
-<p><code>Coming in v2.0</code><br>
-Adds and image for a person. The image has to be in the following directory:<br>
-src/main/resources/images/</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>image p/NAME i/IMAGE</code></p>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>image p/John Doe i/imageofjohn.jpg</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="loading-pre-existing-address-book-code-load-code"><a class="link" href="#loading-pre-existing-address-book-code-load-code">2.13. Loading pre-existing address book : <code>load</code></a></h3>
+<h3 id="loading-pre-existing-address-book-code-load-code"><a class="link" href="#loading-pre-existing-address-book-code-load-code">2.12. Loading pre-existing address book : <code>load</code></a></h3>
 <div class="paragraph">
 <p>Loads pre-existing address book to current address book. The pre-existing<br>
 address book has to be in xml-format and it has to be in the data folder<br>
@@ -527,7 +505,7 @@ with a different name than the current address book.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="setting-password-for-the-address-book-code-password-code"><a class="link" href="#setting-password-for-the-address-book-code-password-code">2.14. Setting password for the address book: <code>password</code></a></h3>
+<h3 id="setting-password-for-the-address-book-code-password-code"><a class="link" href="#setting-password-for-the-address-book-code-password-code">2.13. Setting password for the address book: <code>password</code></a></h3>
 <div class="paragraph">
 <p><code>Coming in v2.0</code><br>
 Sets password for the address book. After setting the password<br>
@@ -550,21 +528,21 @@ you will be prompted the password when initializing the address book.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.15. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.14. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.16. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.15. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.17. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.16. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -643,7 +621,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-26 02:27:49 +00:00
+Last updated 2017-10-26 02:28:14 +00:00
 </div>
 </div>
 </body>
