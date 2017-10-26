@@ -46,51 +46,13 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
 <li><a href="#sort-mechanism">3.2. Sort mechanism</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#birthday-attribute">3.4. Birthday attribute</a></li>
-<li><a href="#load-command">3.5. Load command</a></li>
-<li><a href="#configuration">3.6. Configuration</a></li>
+<li><a href="#list-mechanism">3.3. List mechanism</a></li>
+<li><a href="#design-considerations-3">3.4. Design Considerations</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#birthday-attribute">3.6. Birthday attribute</a></li>
+<li><a href="#phone-attribute">3.7. Phone attribute</a></li>
 </ul>
 </li>
-<li><a href="#documentation">4. Documentation</a>
-<ul class="sectlevel2">
-<li><a href="#editing-documentation">4.1. Editing Documentation</a></li>
-<li><a href="#publishing-documentation">4.2. Publishing Documentation</a></li>
-<li><a href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></li>
-</ul>
-</li>
-<li><a href="#testing">5. Testing</a>
-<ul class="sectlevel2">
-<li><a href="#running-tests">5.1. Running Tests</a></li>
-<li><a href="#types-of-tests">5.2. Types of tests</a></li>
-<li><a href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></li>
-</ul>
-</li>
-<li><a href="#dev-ops">6. Dev Ops</a>
-<ul class="sectlevel2">
-<li><a href="#build-automation">6.1. Build Automation</a></li>
-<li><a href="#continuous-integration">6.2. Continuous Integration</a></li>
-<li><a href="#making-a-release">6.3. Making a Release</a></li>
-<li><a href="#managing-dependencies">6.4. Managing Dependencies</a></li>
-</ul>
-</li>
-<li><a href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested Programming Tasks to Get Started</a>
-<ul class="sectlevel2">
-<li><a href="#improving-each-component">A.1. Improving each component</a></li>
-<li><a href="#creating-a-new-command-code-remark-code">A.2. Creating a new command: <code>remark</code></a></li>
-</ul>
-</li>
-<li><a href="#user-stories">Appendix B: User Stories</a></li>
-<li><a href="#use-cases">Appendix C: Use Cases</a>
-<ul class="sectlevel2">
-<li><a href="#use-case-find-contact-s-birthday">C.1. Use case: Find contact&#8217;s birthday</a></li>
-<li><a href="#use-case-list-people-with-a-specific-tag">C.2. Use case: List people with a specific tag</a></li>
-<li><a href="#use-case-sort-contacts-by-name">C.3. Use case: Sort contacts by name</a></li>
-</ul>
-</li>
-<li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
-<li><a href="#glossary">Appendix E: Glossary</a></li>
-<li><a href="#product-survey">Appendix F: Product Survey</a></li>
 </ul>
 </div>
 </div>
@@ -810,7 +772,42 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="list-mechanism"><a class="link" href="#list-mechanism">3.3. List mechanism</a></h3>
+<div class="paragraph">
+<p>The list mechanism is assisted by two classes <code>ListCommandParser</code> residing in <code>parser</code> and <code>PersonContainsKeywordsPredicate</code> residing in <code>person</code>.<br>
+It supports the listing of contacts which do not modify the addressbook(e.g. <code>Exit</code>, <code>Find</code>). Such commands inherit from <code>Command</code>, unlike commands inheriting from <code>UndoableCommand</code> which modify the state of the address book.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListCommandSequenceDiagram.png" alt="ListCommandSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram shows what happens when a user executes a new list command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ListCommandActivityDiagram.png" alt="ListCommandActivityDiagram" width="400">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4. Design Considerations</a></h3>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>ListCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class ListCommandParser<br>
+<strong>Pros:</strong> We will be able to provide arguments to list only certain types of contacts<br>
+<strong>Cons:</strong> Hard for new developers to understand why we used <code>list</code> command instead of <code>find</code> to get contacts with certain tags.<br>
+<strong>Alternative 2:</strong> No parser class<br>
+<strong>Pros:</strong> Easier for new developers to understand<br>
+<strong>Cons:</strong> All contacts are listed every time which may be an issue if user is trying to filter contacts by tags</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -848,7 +845,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="birthday-attribute"><a class="link" href="#birthday-attribute">3.4. Birthday attribute</a></h3>
+<h3 id="birthday-attribute"><a class="link" href="#birthday-attribute">3.6. Birthday attribute</a></h3>
 <div class="paragraph">
 <p>Person class consists of five different attributes: <code>Name</code>, <code>Address</code>, <code>Phone</code>, <code>Email</code> and <code>Birthday</code>. Birthday class has a very similar implementation compared to the other attribute classes. New instance of Birthday is initialized by giving the constructor the parameter birthday in String format. The parameter is required to be non-null, and it is first validated before accepting it as a birthday value for the class.</p>
 </div>
@@ -879,7 +876,80 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="load-command"><a class="link" href="#load-command">3.5. Load command</a></h3>
+<h3 id="phone-attribute"><a class="link" href="#phone-attribute">3.7. Phone attribute</a></h3>
+<div class="paragraph">
+<p>Person class consists of five different attributes: <code>Name</code>, <code>Address</code>, <code>Phone</code>, <code>Email</code> and <code>Birthday</code>. The Phone class<br>
+has implementation similar to other attribute classes. New instance of Phone is initialized through constructor. Important<br>
+thing to note here is the once the phone is validated to be only numbers, it is also followed by the conversion of phone<br>
+into the national convention format as well.</p>
+</div>
+<div class="paragraph">
+<p>The conversion to national convention is done within the Phone class in the following way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Phone(<span class="predefined-type">String</span> phone) <span class="directive">throws</span> IllegalValueException {
+    <span class="comment">// ... phone validation logic ...</span>
+
+    <span class="local-variable">this</span>.value = formatPhone(trimmedPhone);
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">String</span> formatPhone(<span class="predefined-type">String</span> trimmedPhone) {
+    <span class="comment">// ... variable declarations ...</span>
+    <span class="predefined-type">String</span> formattedPhone = generateFormattedPhone(trimmedPhone, phoneLength);
+
+    <span class="keyword">return</span> formattedPhone;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Validation</strong></p>
+</div>
+<div class="paragraph">
+<p>The valid form of phone is <code>xxxxxxxx</code> with as many characters as the user want, but no less than 3. Every character must<br>
+be a digit and there should be no other character like <code>+</code>. This prevents the user to enter alphabets or other invalid<br>
+characters while entering phone numbers.</p>
+</div>
+<div class="paragraph">
+<p>The example of valid phone numbers are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>6596631234</code></p>
+</li>
+<li>
+<p><code>919911204422</code></p>
+</li>
+<li>
+<p><code>15671237070</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The example of invalid phone numbers are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>6596asd</code></p>
+</li>
+<li>
+<p><code>+919911204422</code></p>
+</li>
+<li>
+<p><code>12</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The current validation allows the user to enter as many digits as he/she wants which is not the case in real life. The<br>
+numbers must be restricted to certain number of digits based on the country. Such validation will be performed in the future<br>
+version of the tool. The validation for number of digits will be quite extensive since different countries have different<br>
+number of digits in their phone numbers, which is the reason it is noe done yet.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
 <div class="paragraph">
 <p>Load command&#8217;s implementation is similar to other commands: LoadCommand class inherits UndoableCommand and load command&#8217;s parser implements Parser interface. The following sequence diagram shows the execution of command "load testbook.xml"</p>
 </div>
@@ -888,18 +958,15 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <img src="images/ParseLoadCommand.png" alt="ParseLoadCommand" width="800">
 </div>
 </div>
+<div class="paragraph">
+<p>=== Configuration</p>
 </div>
-<div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
+<div class="paragraph">
+<p>== Documentation</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="documentation"><a class="link" href="#documentation">4. Documentation</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>We use asciidoc for writing documentation.</p>
 </div>
@@ -915,21 +982,22 @@ We chose asciidoc over Markdown because asciidoc, although a bit more complex th
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="editing-documentation"><a class="link" href="#editing-documentation">4.1. Editing Documentation</a></h3>
+<div class="paragraph">
+<p>=== Editing Documentation</p>
+</div>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
 Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
 </div>
+<div class="paragraph">
+<p>=== Publishing Documentation</p>
 </div>
-<div class="sect2">
-<h3 id="publishing-documentation"><a class="link" href="#publishing-documentation">4.2. Publishing Documentation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
 </div>
+<div class="paragraph">
+<p>=== Converting Documentation to PDF format</p>
 </div>
-<div class="sect2">
-<h3 id="converting-documentation-to-pdf-format"><a class="link" href="#converting-documentation-to-pdf-format">4.3. Converting Documentation to PDF format</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
@@ -960,14 +1028,12 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="paragraph">
 <p><em>Figure 5.6.1 : Saving documentation as PDF files in Chrome</em></p>
 </div>
+<div class="paragraph">
+<p>== Testing</p>
 </div>
+<div class="paragraph">
+<p>=== Running Tests</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="testing"><a class="link" href="#testing">5. Testing</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
 <div class="paragraph">
 <p>There are three ways to run tests.</p>
 </div>
@@ -1027,9 +1093,9 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 <div class="paragraph">
 <p>To run tests in headless mode, open a console and run the command <code>gradlew clean headless allTests</code> (Mac/Linux: <code>./gradlew clean headless allTests</code>)</p>
 </div>
+<div class="paragraph">
+<p>=== Types of tests</p>
 </div>
-<div class="sect2">
-<h3 id="types-of-tests"><a class="link" href="#types-of-tests">5.2. Types of tests</a></h3>
 <div class="paragraph">
 <p>We have two types of tests:</p>
 </div>
@@ -1069,11 +1135,9 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect2">
-<h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">5.3. Troubleshooting Testing</a></h3>
 <div class="paragraph">
-<p><strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
+<p>=== Troubleshooting Testing
+<strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1085,26 +1149,24 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>== Dev Ops</p>
 </div>
+<div class="paragraph">
+<p>=== Build Automation</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
 <div class="paragraph">
 <p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
 </div>
+<div class="paragraph">
+<p>=== Continuous Integration</p>
 </div>
-<div class="sect2">
-<h3 id="continuous-integration"><a class="link" href="#continuous-integration">6.2. Continuous Integration</a></h3>
 <div class="paragraph">
 <p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
 </div>
+<div class="paragraph">
+<p>=== Making a Release</p>
 </div>
-<div class="sect2">
-<h3 id="making-a-release"><a class="link" href="#making-a-release">6.3. Making a Release</a></h3>
 <div class="paragraph">
 <p>Here are the steps to create a new release.</p>
 </div>
@@ -1124,20 +1186,17 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Managing Dependencies</p>
 </div>
-<div class="sect2">
-<h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.4. Managing Dependencies</a></h3>
 <div class="paragraph">
 <p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)</p>
 </div>
+<div class="paragraph">
+<p>== Suggested Programming Tasks to Get Started</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="suggested-programming-tasks-to-get-started"><a class="link" href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested Programming Tasks to Get Started</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Suggested path for new programmers:</p>
 </div>
@@ -1151,8 +1210,9 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ol>
 </div>
-<div class="sect2">
-<h3 id="improving-each-component"><a class="link" href="#improving-each-component">A.1. Improving each component</a></h3>
+<div class="paragraph">
+<p>=== Improving each component</p>
+</div>
 <div class="paragraph">
 <p>Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).</p>
 </div>
@@ -1494,16 +1554,15 @@ Do take a look at the <a href="#storage-component">Design: Storage Component</a>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>=== Creating a new command: <code>remark</code></p>
 </div>
-<div class="sect2">
-<h3 id="creating-a-new-command-code-remark-code"><a class="link" href="#creating-a-new-command-code-remark-code">A.2. Creating a new command: <code>remark</code></a></h3>
 <div class="paragraph">
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
-<div class="sect3">
-<h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
 <div class="paragraph">
-<p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
+<p>==== Description
+Edits the remark for a person specified in the <code>INDEX</code>.<br>
 Format: <code>remark INDEX r/[REMARK]</code></p>
 </div>
 <div class="paragraph">
@@ -1521,13 +1580,12 @@ Removes the remark for the first person.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
-<div class="sect4">
-<h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">[Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
 <div class="paragraph">
-<p>Let&#8217;s start by teaching the application how to parse a <code>remark</code> command. We will add the logic of <code>remark</code> later.</p>
+<p>==== Step-by-step Instructions</p>
+</div>
+<div class="paragraph">
+<p>===== [Step 1] Logic: Teach the app to accept 'remark' which does nothing
+Let&#8217;s start by teaching the application how to parse a <code>remark</code> command. We will add the logic of <code>remark</code> later.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1555,11 +1613,9 @@ Removes the remark for the first person.</p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect4">
-<h5 id="step-2-logic-teach-the-app-to-accept-remark-arguments"><a class="link" href="#step-2-logic-teach-the-app-to-accept-remark-arguments">[Step 2] Logic: Teach the app to accept 'remark' arguments</a></h5>
 <div class="paragraph">
-<p>Let&#8217;s teach the application to parse arguments that our <code>remark</code> command will accept. E.g. <code>1 r/Likes to drink coffee.</code></p>
+<p>===== [Step 2] Logic: Teach the app to accept 'remark' arguments
+Let&#8217;s teach the application to parse arguments that our <code>remark</code> command will accept. E.g. <code>1 r/Likes to drink coffee.</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1594,11 +1650,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect4">
-<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code">[Step 3] Ui: Add a placeholder for remark in <code>PersonCard</code></a></h5>
 <div class="paragraph">
-<p>Let&#8217;s add a placeholder on all our <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> s to display a remark for each person later.</p>
+<p>===== [Step 3] Ui: Add a placeholder for remark in <code>PersonCard</code>
+Let&#8217;s add a placeholder on all our <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> s to display a remark for each person later.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1623,11 +1677,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect4">
-<h5 id="step-4-model-add-code-remark-code-class"><a class="link" href="#step-4-model-add-code-remark-code-class">[Step 4] Model: Add <code>Remark</code> class</a></h5>
 <div class="paragraph">
-<p>We have to properly encapsulate the remark in our <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/person/ReadOnlyPerson.java"><code>ReadOnlyPerson</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
+<p>===== [Step 4] Model: Add <code>Remark</code> class
+We have to properly encapsulate the remark in our <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/person/ReadOnlyPerson.java"><code>ReadOnlyPerson</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1652,11 +1704,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect4">
-<h5 id="step-5-model-modify-code-readonlyperson-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-readonlyperson-code-to-support-a-code-remark-code-field">[Step 5] Model: Modify <code>ReadOnlyPerson</code> to support a <code>Remark</code> field</a></h5>
 <div class="paragraph">
-<p>Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/person/ReadOnlyPerson.java"><code>ReadOnlyPerson</code></a>.</p>
+<p>===== [Step 5] Model: Modify <code>ReadOnlyPerson</code> to support a <code>Remark</code> field
+Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/person/ReadOnlyPerson.java"><code>ReadOnlyPerson</code></a>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1674,11 +1724,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect4">
-<h5 id="step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class">[Step 6] Storage: Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class</a></h5>
 <div class="paragraph">
-<p>We now have <code>Remark</code> s for <code>Person</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/storage/XmlAdaptedPerson.java"><code>XmlAdaptedPerson</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
+<p>===== [Step 6] Storage: Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class
+We now have <code>Remark</code> s for <code>Person</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/storage/XmlAdaptedPerson.java"><code>XmlAdaptedPerson</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1703,11 +1751,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect4">
-<h5 id="step-7-ui-connect-code-remark-code-field-to-code-personcard-code"><a class="link" href="#step-7-ui-connect-code-remark-code-field-to-code-personcard-code">[Step 7] Ui: Connect <code>Remark</code> field to <code>PersonCard</code></a></h5>
 <div class="paragraph">
-<p>Our remark label in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
+<p>===== [Step 7] Ui: Connect <code>Remark</code> field to <code>PersonCard</code>
+Our remark label in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1732,11 +1778,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-</div>
-<div class="sect4">
-<h5 id="step-8-logic-implement-code-remarkcommand-execute-code-logic"><a class="link" href="#step-8-logic-implement-code-remarkcommand-execute-code-logic">[Step 8] Logic: Implement <code>RemarkCommand#execute()</code> logic</a></h5>
 <div class="paragraph">
-<p>We now have everything set up&#8230;&#8203; but we still can&#8217;t modify the remarks. Let&#8217;s finish it up by adding in actual logic for our <code>remark</code> command.</p>
+<p>===== [Step 8] Logic: Implement <code>RemarkCommand#execute()</code> logic
+We now have everything set up&#8230;&#8203; but we still can&#8217;t modify the remarks. Let&#8217;s finish it up by adding in actual logic for our <code>remark</code> command.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -1758,20 +1802,15 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>==== Full Solution</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full Solution</a></h4>
 <div class="paragraph">
 <p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/599">PR</a> for the step-by-step solution.</p>
 </div>
+<div class="paragraph">
+<p>== User Stories</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
 </div>
@@ -2012,11 +2051,9 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>{More to be added}</p>
 </div>
+<div class="paragraph">
+<p>== Use Cases</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
@@ -2069,8 +2106,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="use-case-find-contact-s-birthday"><a class="link" href="#use-case-find-contact-s-birthday">C.1. Use case: Find contact&#8217;s birthday</a></h3>
+<div class="paragraph">
+<p>=== Use case: Find contact&#8217;s birthday</p>
+</div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2103,9 +2141,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Use case: List people with a specific tag</p>
 </div>
-<div class="sect2">
-<h3 id="use-case-list-people-with-a-specific-tag"><a class="link" href="#use-case-list-people-with-a-specific-tag">C.2. Use case: List people with a specific tag</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2135,9 +2173,9 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Use case: Sort contacts by name</p>
 </div>
-<div class="sect2">
-<h3 id="use-case-sort-contacts-by-name"><a class="link" href="#use-case-sort-contacts-by-name">C.3. Use case: Sort contacts by name</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2176,12 +2214,9 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>{More to be added}</p>
 </div>
+<div class="paragraph">
+<p>== Non Functional Requirements</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
-<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2225,11 +2260,9 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>{More to be added}</p>
 </div>
+<div class="paragraph">
+<p>== Glossary</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
-<div class="sectionbody">
 <div id="mainstream-os" class="paragraph">
 <p>Mainstream OS</p>
 </div>
@@ -2246,11 +2279,9 @@ for <code>RemarkCommandParser</code>.</p>
 <pre>A contact detail that is not meant to be shared with others</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>== Product Survey</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p><strong>Product Name</strong></p>
 </div>
@@ -2286,9 +2317,12 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-26 02:28:14 +00:00
+Last updated 2017-10-26 02:49:33 +00:00
 </div>
 </div>
 </body>
