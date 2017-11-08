@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Jonatan Lehtinen - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Jonatan Lehtinen - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-people-connect"><a class="link" href="#project-people-connect">Project: People.connect</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>People.connect is a desktop address book application. This application allows users to store important information about the people they care about. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/joppeel.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/joppeel.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-birthday-attribute"><a class="link" href="#enhancement-added-birthday-attribute">Enhancement Added: Birthday attribute</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p>When adding a new contact, the user can give the birthday of the contact as a parameter for the add command. Birthday can also be edited in case of mistakes.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13/02/1998 pt/JohnDoe.jpg</code><br>
+Adds new contact "John Doe" with 13/02/1998 as its birthday</p>
+</li>
+<li>
+<p><code>edit 1 b/13/10/1992</code><br>
+Chooses the contact, who is listed as the first contact in the current listing and edits its birthday to be 13/10/1992</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>As this application is used to store important information about people, it&#8217;s highly important that the application is also capable of storing something as important as a birthday.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="birthday-attribute"><a class="link" href="#birthday-attribute">Birthday attribute</a></h3>
+<div class="paragraph">
+<p>Person class consists of five different attributes: <code>Name</code>, <code>Address</code>, <code>Phone</code>, <code>Email</code> and <code>Birthday</code>. Birthday class has a very similar implementation compared to the other attribute classes. New instance of Birthday is initialized by giving the constructor the parameter birthday in String format. The parameter is required to be non-null, and it is first validated before accepting it as a birthday value for the class.</p>
+</div>
+<div class="paragraph">
+<p><strong>Validation</strong></p>
+</div>
+<div class="paragraph">
+<p>The valid form for a birthday string is <code>DD/MM/YYYY</code>, where every character must be a digit except for the slashes. This validation is performed to prohibit the user from inputting something completely peculiar, for example a string of spaces or a long sequence of characters.</p>
+</div>
+<div class="paragraph">
+<p>Examples for a valid birthday:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>14/12/1993</code></p>
+</li>
+<li>
+<p><code>22/02/2001</code></p>
+</li>
+<li>
+<p><code>29/02/2008</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The date of the birthday is validated using Java&#8217;s SimpleDateFormatter class. The formatter parses user&#8217;s input and if the parsing is successful, the date is valid. The parser also accounts for leap days.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-loading-pre-existing-address-book"><a class="link" href="#enhancement-added-loading-pre-existing-address-book">Enhancement Added: Loading pre-existing address book</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="loading-pre-existing-address-book-code-load-code"><a class="link" href="#loading-pre-existing-address-book-code-load-code">Loading pre-existing address book : <code>load</code></a></h3>
+<div class="paragraph">
+<p>Loads pre-existing address book to current address book. The pre-existing<br>
+address book has to be in xml-format and it has to be in the data folder<br>
+with a different name than the current address book.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>load FILENAME</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>load addressbook2.xml</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>In case the user has two different address books and wants to combine those address books as one, this command allows user to avoid having to type every contact&#8217;s information from the other address book manually. Also, this command allows users to conveniently share their contacts to other users by just sending their addressbook.xml file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="load-command"><a class="link" href="#load-command">Load command</a></h3>
+<div class="paragraph">
+<p>Load command&#8217;s implementation is similar to other commands: LoadCommand class inherits UndoableCommand and load command&#8217;s parser implements Parser interface. The following sequence diagram shows the execution of command "load testbook.xml"</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ParseLoadCommand.png" alt="ParseLoadCommand" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-remind-the-user-of-a-contact-s-birthday"><a class="link" href="#enhancement-proposed-remind-the-user-of-a-contact-s-birthday">Enhancement Proposed: Remind the user of a contact&#8217;s birthday</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="external-behaviour"><a class="link" href="#external-behaviour">External Behaviour</a></h3>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="informing-about-the-birthdays"><a class="link" href="#informing-about-the-birthdays">Informing about the birthdays</a></h3>
+<div class="paragraph">
+<p><code>Coming in v2.0</code><br>
+When the application is started, it opens a pop-up window to show the<br>
+persons that are having a birthday on that day. Also, when adding a new<br>
+contact or loading new contacts from a pre-existing address book,<br>
+the user would be informed if some of the new contacts were having a birthday.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Now that the application is capable of storing birthdays, a natural and useful feature to implement next would be to inform the user if his contacts are having a birthday.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Found bugs from other team&#8217;s product(Issues <a href="https://github.com/CS2103AUG2017-T15-B3/main/issues/108">#108</a>, <a href="https://github.com/CS2103AUG2017-T15-B3/main/issues/113">#113</a>, <a href="https://github.com/CS2103AUG2017-T15-B3/main/issues/120">#120</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-08 16:16:13 +00:00
+</div>
+</div>
+</body>
+</html>
