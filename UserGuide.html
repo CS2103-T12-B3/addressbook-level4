@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>AddressBook Level 4 - User Guide</title>
+<title>People.connect - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - User Guide</h1>
+<h1>People.connect - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -151,7 +151,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">2.2. Adding a person: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY pt/PHOTO [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -160,7 +160,7 @@ Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY pt/PHOTO [t
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0). A person also doesn&#8217;t have to have a photo. If no photo is defined, the application uses automatically a default photo that can be updated with <code>edit</code> command.
 </td>
 </tr>
 </table>
@@ -175,6 +175,9 @@ A person can have any number of tags (including 0)
 </li>
 <li>
 <p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/08/08/2008 pt/BetsyC.png t/criminal</code></p>
+</li>
+<li>
+<p><code>add n/Test Name t/colleague e/testname@example.com a/Test road p/323234 b/12/09/2010</code></p>
 </li>
 </ul>
 </div>
@@ -565,7 +568,7 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/13/12/1980 t/friend t/colleague</code></p>
 </li>
 <li>
@@ -621,7 +624,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 15:52:54 +00:00
+Last updated 2017-11-08 16:11:45 +00:00
 </div>
 </div>
 </body>
