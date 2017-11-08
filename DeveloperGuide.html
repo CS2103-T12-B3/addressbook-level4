@@ -51,8 +51,9 @@
 <li><a href="#logging">3.5. Logging</a></li>
 <li><a href="#birthday-attribute">3.6. Birthday attribute</a></li>
 <li><a href="#phone-attribute">3.7. Phone attribute</a></li>
-<li><a href="#load-command">3.8. Load command</a></li>
-<li><a href="#configuration">3.9. Configuration</a></li>
+<li><a href="#photo-attribute">3.8. Photo attribute</a></li>
+<li><a href="#load-command">3.9. Load command</a></li>
+<li><a href="#configuration">3.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -781,7 +782,8 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="sect2">
 <h3 id="sort-mechanism"><a class="link" href="#sort-mechanism">3.2. Sort mechanism</a></h3>
 <div class="paragraph">
-<p>The sort mechanism is facilitated by an <code>Event</code>. When a sort command is executed, the sort command will conduct a sort on the current <code>list</code> in the address book based on the full name in alphabetical order.</p>
+<p>The sort mechanism is facilitated the <code>AddressBookParser</code> where the sort command will be called.<br>
+When a sort command is executed, the sort command will conduct a sort on the current <code>list</code> in the address book based on the full name in alphabetical order.</p>
 </div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the sort operation works:</p>
@@ -796,7 +798,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SortCommandActivityDiagram.png" alt="SortCommandActivityDiagram" width="800">
+<img src="images/SortCommandActivityDiagram.png" alt="SortCommandActivityDiagram" width="400">
 </div>
 </div>
 <div class="sect3">
@@ -991,7 +993,51 @@ number of digits in their phone numbers, which is the reason it is noe done yet.
 </div>
 </div>
 <div class="sect2">
-<h3 id="load-command"><a class="link" href="#load-command">3.8. Load command</a></h3>
+<h3 id="photo-attribute"><a class="link" href="#photo-attribute">3.8. Photo attribute</a></h3>
+<div class="paragraph">
+<p>Person class consists of five different attributes: <code>Name</code>, <code>Address</code>, <code>Phone</code>, <code>Email</code> and <code>Birthday</code>. Photo class has a very similar implementation compared to the other attribute classes. New instance of Photo is initialized by giving the constructor the parameter photo in String format. The parameter is optional and if a file is not in the correct location, a default photo will be loaded on the address book.</p>
+</div>
+<div class="paragraph">
+<p><strong>Validation</strong></p>
+</div>
+<div class="paragraph">
+<p>The valid form for a birthday string is <code>template.jpg</code>, where both file name and file type must be valid. This validation is performed to prohibit the user from inputting something completely peculiar, for example a file name which only consists of numbers and a file type which is not an image.</p>
+</div>
+<div class="paragraph">
+<p>Examples for a valid photo file name:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>abc.jpg</code></p>
+</li>
+<li>
+<p><code>JPG.png</code></p>
+</li>
+<li>
+<p><code>EddyTan.jpg</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples for a invalid photo file name:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>.jpg</code></p>
+</li>
+<li>
+<p><code>123.txt</code></p>
+</li>
+<li>
+<p><code>EddyTan</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="load-command"><a class="link" href="#load-command">3.9. Load command</a></h3>
 <div class="paragraph">
 <p>Load command&#8217;s implementation is similar to other commands: LoadCommand class inherits UndoableCommand and load command&#8217;s parser implements Parser interface. The following sequence diagram shows the execution of command "load testbook.xml"</p>
 </div>
@@ -1002,7 +1048,7 @@ number of digits in their phone numbers, which is the reason it is noe done yet.
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.9. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2400,7 +2446,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 16:16:13 +00:00
+Last updated 2017-11-08 16:54:03 +00:00
 </div>
 </div>
 </body>

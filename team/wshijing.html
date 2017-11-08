@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Wong Shi Jing - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Wong Shi Jing - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-people-connect"><a class="link" href="#project-people-connect">Project: People.connect</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>People.connect is a desktop address book application used to allow people to store important information about those they care for. The user interacts with it using a CLI, and it has a GUI created although most user interactions happen using a command line interface where minimal mouse usage is required.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/wshijing.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/wshijing.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-photo-attribute"><a class="link" href="#enhancement-added-photo-attribute">Enhancement Added: Photo attribute</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p>When a new user is added to the address book, for a person to be easily identified, a photo could be added. However, this field may be optional. The address book will still provide a default image so that the list will look consistent. In addition, a person can also edit a photo by just editing the photo file name of a person.</p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>If a user were to associate a person in the address book with a photo, in the case of two people having the same name, the user can easily differentiate them.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="photo-attribute"><a class="link" href="#photo-attribute">Photo attribute</a></h3>
+<div class="paragraph">
+<p>Person class consists of five different attributes: <code>Name</code>, <code>Address</code>, <code>Phone</code>, <code>Email</code> and <code>Birthday</code>. Photo class has a very similar implementation compared to the other attribute classes. New instance of Photo is initialized by giving the constructor the parameter photo in String format. The parameter is optional and if a file is not in the correct location, a default photo will be loaded on the address book.</p>
+</div>
+<div class="paragraph">
+<p><strong>Validation</strong></p>
+</div>
+<div class="paragraph">
+<p>The valid form for a birthday string is <code>template.jpg</code>, where both file name and file type must be valid. This validation is performed to prohibit the user from inputting something completely peculiar, for example a file name which only consists of numbers and a file type which is not an image.</p>
+</div>
+<div class="paragraph">
+<p>Examples for a valid photo file name:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>abc.jpg</code></p>
+</li>
+<li>
+<p><code>JPG.png</code></p>
+</li>
+<li>
+<p><code>EddyTan.jpg</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples for a invalid photo file name:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>.jpg</code></p>
+</li>
+<li>
+<p><code>123.txt</code></p>
+</li>
+<li>
+<p><code>EddyTan</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-sort"><a class="link" href="#enhancement-added-sort">Enhancement Added: Sort</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p>A user might have a long list of contacts and the sort command could be used to allow the address book to be more user-friendly as it will be sorted in alphabetical order.</p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>If a user were to have a list of 100 persons it will be tough to find the 49 added person if the user could not remember the index. The user can just use the sort command and looking through a list in alphabetical order is much hassle free.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sort-mechanism"><a class="link" href="#sort-mechanism">Sort mechanism</a></h3>
+<div class="paragraph">
+<p>The sort mechanism is facilitated the <code>AddressBookParser</code> where the sort command will be called.<br>
+When a sort command is executed, the sort command will conduct a sort on the current <code>list</code> in the address book based on the full name in alphabetical order.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the sort operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortCommandSequenceDiagram.png" alt="SortCommandSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram summarize what happens inside the <code>Sort Command</code> when a user executes the command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SortCommandActivityDiagram.png" alt="SortCommandActivityDiagram" width="400">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>SortCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> Sort list by triggering an event to sort the current ObservableList&lt;ReadOnlyPerson&gt; person list.<br>
+<strong>Pros:</strong> We will not make any changes to the current <code>internalList</code> thus will not affect any other commands that we have implemented.<br>
+<strong>Cons:</strong> Hard for new developers to understand the way we sort the read only person list.<br>
+<strong>Alternative 2:</strong> Just sort the <code>internalList</code><br>
+<strong>Pros:</strong> Does not involve the <code>ObservableList</code>, easier for new developers to understand.<br>
+<strong>Cons:</strong> Changes made to the <code>internalList</code> might affect other existing commands.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-sort-by-birthday-command-code-sort-birthday-code"><a class="link" href="#enhancement-proposed-sort-by-birthday-command-code-sort-birthday-code">Enhancement Proposed: Sort by birthday command <code>sort birthday</code></a></h3>
+<div class="paragraph">
+<p>Currently, the sort function only sorts the name. We could allow the user to sort by birthday so that the user can see upcoming birthdays shown at the top of the list.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Found bugs from another team&#8217;s product: [<a href="https://github.com/CS2103AUG2017-W13-B1/main/issues/91">#91</a>]</p>
+</li>
+<li>
+<p>Suggested enhancement for another team&#8217;s product: [<a href="https://github.com/CS2103AUG2017-W13-B1/main/issues/92">#92</a>]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-08 16:54:03 +00:00
+</div>
+</div>
+</body>
+</html>
