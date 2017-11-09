@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Ruchir Aggarwal - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Ruchir Aggarwal - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-people-connect-level-4"><a class="link" href="#project-people-connect-level-4">Project: People.connect - Level 4</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>People.connect is a desktop address book application. This application allows users to store important information about the people they care about. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/aggarwalRuchir.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/aggarwalRuchir.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-list-by-tag"><a class="link" href="#enhancement-added-list-by-tag">Enhancement Added: list by tag</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-persons-code-list-code"><a class="link" href="#listing-persons-code-list-code">Listing persons : <code>list</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all persons in the address book.<br>
+If tags are supplied, then shows the list of all persons with that tag in the address book. The tags are case-sensitive.<br>
+Format: <code>list [t/TAG]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+Shows the list of all persons in the address book</p>
+</li>
+<li>
+<p><code>list t/friends</code><br>
+Shows the list of only those persons in the address book that are tagged as <code>friends</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>Sometimes the user may require to find people that belong to a certain category. An example can be a student trying to find fellow contacts with tag 'CS2103' in the app.<br>
+In this case, using a find command will not be feasible since it uses name as its arguments but students can have different names in our case. Hence, using list command<br>
+makes more sense. Hence, instead of listing the entire address book, I have implemented the list feature by tag.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-mechanism"><a class="link" href="#list-mechanism">List mechanism</a></h3>
+<div class="paragraph">
+<p>The list mechanism is assisted by two classes <code>ListCommandParser</code> residing in <code>parser</code> and <code>PersonContainsKeywordsPredicate</code> residing in <code>person</code>.<br>
+It supports the listing of contacts which do not modify the addressbook(e.g. <code>Exit</code>, <code>Find</code>). Such commands inherit from <code>Command</code>, unlike commands inheriting from <code>UndoableCommand</code> which modify the state of the address book.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ListCommandSequenceDiagram.png" alt="ListCommandSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The following activity diagram shows what happens when a user executes a new list command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ListCommandActivityDiagram.png" alt="ListCommandActivityDiagram" width="400">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h3>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>ListCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class ListCommandParser<br>
+<strong>Pros:</strong> We will be able to provide arguments to list only certain types of contacts<br>
+<strong>Cons:</strong> Hard for new developers to understand why we used <code>list</code> command instead of <code>find</code> to get contacts with certain tags.<br>
+<strong>Alternative 2:</strong> No parser class<br>
+<strong>Pros:</strong> Easier for new developers to understand<br>
+<strong>Cons:</strong> All contacts are listed every time which may be an issue if user is trying to filter contacts by tags</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-phone-attribute"><a class="link" href="#enhancement-added-phone-attribute">Enhancement Added: Phone attribute</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p>When the app shows the contact details, it displays the phone in the national convention.<br>
+However, when you enter the contact when adding a new person, there is no need to follow<br>
+the convention, rather enter the phone number as a single number.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/13/02/1998 pt/JohnDoe.jpg</code><br>
+Adds new contact "John Doe" with 98765432 as its phone but displayed as 9876-5432 on the person card</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>From the name of the app itself, it is evident that connections are of utmost important and phone numbers are the most<br>
+important of them all. Displaying phone numbers in the formats that are similar to how we see in real life will make it<br>
+easier for user to interpret it.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="phone-attribute"><a class="link" href="#phone-attribute">Phone attribute</a></h3>
+<div class="paragraph">
+<p>Person class consists of five different attributes: <code>Name</code>, <code>Address</code>, <code>Phone</code>, <code>Email</code> and <code>Birthday</code>. The Phone class<br>
+has implementation similar to other attribute classes. New instance of Phone is initialized through constructor. Important<br>
+thing to note here is the once the phone is validated to be only numbers, it is also followed by the conversion of phone<br>
+into the national convention format as well.</p>
+</div>
+<div class="paragraph">
+<p>The conversion to national convention is done within the Phone class in the following way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> Phone(<span class="predefined-type">String</span> phone) <span class="directive">throws</span> IllegalValueException {
+    <span class="comment">// ... phone validation logic ...</span>
+
+    <span class="local-variable">this</span>.value = formatPhone(trimmedPhone);
+}
+
+<span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">String</span> formatPhone(<span class="predefined-type">String</span> trimmedPhone) {
+    <span class="comment">// ... variable declarations ...</span>
+    <span class="predefined-type">String</span> formattedPhone = generateFormattedPhone(trimmedPhone, phoneLength);
+
+    <span class="keyword">return</span> formattedPhone;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Validation</strong></p>
+</div>
+<div class="paragraph">
+<p>The valid form of phone is <code>xxxxxxxx</code> with as many characters as the user want, but no less than 3. Every character must<br>
+be a digit and there should be no other character like <code>+</code>. This prevents the user to enter alphabets or other invalid<br>
+characters while entering phone numbers.</p>
+</div>
+<div class="paragraph">
+<p>The example of valid phone numbers are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>6596631234</code></p>
+</li>
+<li>
+<p><code>919911204422</code></p>
+</li>
+<li>
+<p><code>15671237070</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The example of invalid phone numbers are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>6596asd</code></p>
+</li>
+<li>
+<p><code>+919911204422</code></p>
+</li>
+<li>
+<p><code>12</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The current validation allows the user to enter as many digits as he/she wants which is not the case in real life. The<br>
+numbers must be restricted to certain number of digits based on the country. Such validation will be performed in the future<br>
+version of the tool. The validation for number of digits will be quite extensive since different countries have different<br>
+number of digits in their phone numbers, which is the reason it is noe done yet.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-adding-password-on-addressbook"><a class="link" href="#enhancement-proposed-adding-password-on-addressbook">Enhancement Proposed: Adding password on addressbook</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="external-behaviour"><a class="link" href="#external-behaviour">External Behaviour</a></h3>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>Since the app has a feature of hiding certain fields about a person, if the addressbook is not locked, any person can access those<br>
+details using 'viewall' command which would leave the point of hiding details useless. Hence, adding a level of security<br>
+will be a good feature to implement.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Found bugs in other team&#8217;s product (Issues <a href="https://github.com/CS2103AUG2017-T11-B2/main/issues/140">#140</a>, <a href="https://github.com/CS2103AUG2017-T11-B2/main/issues/138">#138</a>)</p>
+</li>
+<li>
+<p>Suggested enhancement for another team&#8217;s product (Issues <a href="https://github.com/CS2103AUG2017-T11-B2/main/issues/139">#139</a>]</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-09 01:05:08 +00:00
+</div>
+</div>
+</body>
+</html>
