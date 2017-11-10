@@ -146,11 +146,11 @@ public class MainWindow extends UiPart<Region> {
         mapsPanel = new MapsPanel();
         mapsPlaceholder.getChildren().add(mapsPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         personDetailsPanel = new PersonDetailsCard(logic.getFilteredPersonList());
         personDetailsPanelHolder.getChildren().add(personDetailsPanel.getRoot());
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

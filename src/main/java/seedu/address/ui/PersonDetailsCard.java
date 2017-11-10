@@ -7,37 +7,45 @@ import java.util.HashMap;
 import java.util.Random;
 import javafx.collections.ObservableList;
 
+import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import seedu.address.logic.Logic;
+import javafx.scene.layout.*;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
+import javafx.scene.shape.Circle;
+
 public class PersonDetailsCard extends UiPart<Region> {
 
     private static final String FXML = "PersonDetailsCard.fxml";
-    private static String[] colors = {"red", "yellow", "green", "blue", "pink",
+    private static String[] colors = {"red", "green", "blue", "pink",
             "grey", "orange", "brown", "purple", "magenta", "indigo"};
     private static HashMap<String, String> tagColors = new HashMap<>();
     private static Random random = new Random();
 
     private static final String BASE_DIR = System.getProperty("user.dir") + "/src/main/resources/images/";
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     public ReadOnlyPerson person;
 
     @FXML
-    private HBox cardPane;
+    private VBox personPanel;
     @FXML
-    private GridPane grid;
+    private HBox phoneBox;
+    @FXML
+    private HBox addressBox;
+    @FXML
+    private HBox emailBox;
+    @FXML
+    private HBox birthdayBox;
+    @FXML
+    private HBox tagsBox;
     @FXML
     private ImageView photo;
     @FXML
@@ -64,12 +72,12 @@ public class PersonDetailsCard extends UiPart<Region> {
 
     public PersonDetailsCard(ObservableList<ReadOnlyPerson> personList) {
         super(FXML);
-        this.person = getFirstPersonInTheList(personList);
-        initPersonDetails(person);
-        initTags(person);
-        //bindListeners(person);
+        this.person = personList.get(0);
         initPhoto(person);
         initIcons();
+        bindListeners(person);
+        initTags(person);
+        registerAsAnEventHandler(this);
     }
 
     /**
@@ -97,28 +105,20 @@ public class PersonDetailsCard extends UiPart<Region> {
             if (photoFile.exists()) {
                 FileInputStream fileStream = new FileInputStream(photoFile);
                 Image personPhoto = new Image(fileStream);
-                photo = new ImageView(personPhoto);
-                photo.setFitHeight(person.getPhoto().HEIGHT);
-                photo.setFitWidth(person.getPhoto().WIDTH);
-                cardPane.getChildren().add(photo);
+                final Circle clip = new Circle(100, 72, 72);
+                photo.setClip(clip);
+                photo.imageProperty().set(personPhoto);
             } else {
                 File defaultPhotoFile = new File(person.getPhoto().getTemplatePhotoDir());
                 FileInputStream defaultFileStream = new FileInputStream(defaultPhotoFile);
                 Image defaultPersonPhoto = new Image(defaultFileStream);
-                photo = new ImageView(defaultPersonPhoto);
-
-                photo.setFitHeight(person.getPhoto().HEIGHT);
-                photo.setFitWidth(person.getPhoto().WIDTH);
-                cardPane.getChildren().add(photo);
+                final Circle clip = new Circle(100, 72, 72);
+                photo.setClip(clip);
+                photo.imageProperty().set(defaultPersonPhoto);
             }
         } catch (Exception e) {
             System.out.println("Image not found in directory");
         }
-    }
-
-    private void initPersonDetails(ReadOnlyPerson person) {
-        name.setText(person.getName().toString());
-        //grid.getChildren().add(name);
     }
 
     /**
@@ -141,95 +141,69 @@ public class PersonDetailsCard extends UiPart<Region> {
     }
 
     private void initIcons() {
-        int iconHeight = 50;
-        int iconWidth = 50;
         try {
-            initPhoneIcon(iconHeight, iconWidth);
-            initAddressIcon(iconHeight, iconWidth);
-            initEmailIcon(iconHeight, iconWidth);
-            initBirthdayIcon(iconHeight, iconWidth);
+            initPhoneIcon();
+            initAddressIcon();
+            initEmailIcon();
+            initBirthdayIcon();
         } catch (Exception e) {
             System.out.println("Icon not found in directory");
         }
     }
 
-    private void initPhoneIcon(int iconHeight, int iconWidth) throws Exception {
+    private void initPhoneIcon() throws Exception {
         File photoFile = new File(BASE_DIR + "phone_icon.png");
         if (photoFile.exists()) {
             FileInputStream fileStream = new FileInputStream(photoFile);
             Image phoneIconPhoto = new Image(fileStream);
-            phoneIcon = new ImageView(phoneIconPhoto);
-            phoneIcon.setFitHeight(iconHeight);
-            phoneIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(phoneIcon);
+            phoneIcon.imageProperty().setValue(phoneIconPhoto);
         } else {
             File defaultPhotoFile = new File(BASE_DIR + "defaultIcon");
             FileInputStream defaultFileStream = new FileInputStream(defaultPhotoFile);
             Image defaultPhoneIconPhoto = new Image(defaultFileStream);
-            phoneIcon = new ImageView(defaultPhoneIconPhoto);
-            phoneIcon.setFitHeight(iconHeight);
-            phoneIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(phoneIcon);
+            phoneIcon.imageProperty().setValue(defaultPhoneIconPhoto);
         }
     }
 
-    private void initAddressIcon(int iconHeight, int iconWidth) throws Exception {
+    private void initAddressIcon() throws Exception {
         File photoFile = new File(BASE_DIR + "address_icon.png");
         if (photoFile.exists()) {
             FileInputStream fileStream = new FileInputStream(photoFile);
             Image addressIconPhoto = new Image(fileStream);
-            addressIcon = new ImageView(addressIconPhoto);
-            addressIcon.setFitHeight(iconHeight);
-            addressIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(addressIcon);
+            addressIcon.imageProperty().setValue(addressIconPhoto);
         } else {
             File defaultPhotoFile = new File(BASE_DIR + "defaultIcon");
             FileInputStream defaultFileStream = new FileInputStream(defaultPhotoFile);
             Image defaultAddressIconPhoto = new Image(defaultFileStream);
-            addressIcon = new ImageView(defaultAddressIconPhoto);
-            addressIcon.setFitHeight(iconHeight);
-            addressIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(addressIcon);
+            addressIcon.imageProperty().setValue(defaultAddressIconPhoto);
         }
     }
 
-    private void initEmailIcon(int iconHeight, int iconWidth) throws Exception {
+    private void initEmailIcon() throws Exception {
         File photoFile = new File(BASE_DIR + "email_icon.png");
         if (photoFile.exists()) {
             FileInputStream fileStream = new FileInputStream(photoFile);
             Image emailIconPhoto = new Image(fileStream);
-            emailIcon = new ImageView(emailIconPhoto);
-            emailIcon.setFitHeight(iconHeight);
-            emailIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(emailIcon);
+            emailIcon.imageProperty().setValue(emailIconPhoto);
         } else {
             File defaultPhotoFile = new File(BASE_DIR + "defaultIcon");
             FileInputStream defaultFileStream = new FileInputStream(defaultPhotoFile);
             Image defaultEmailIconPhoto = new Image(defaultFileStream);
-            emailIcon = new ImageView(defaultEmailIconPhoto);
-            emailIcon.setFitHeight(iconHeight);
-            emailIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(emailIcon);
+            emailIcon.imageProperty().setValue(defaultEmailIconPhoto);
         }
     }
 
-    private void initBirthdayIcon(int iconHeight, int iconWidth) throws Exception {
+    private void initBirthdayIcon() throws Exception {
         File photoFile = new File(BASE_DIR + "birthday_icon.png");
         if (photoFile.exists()) {
             FileInputStream fileStream = new FileInputStream(photoFile);
             Image birthdayIconPhoto = new Image(fileStream);
-            birthdayIcon = new ImageView(birthdayIconPhoto);
-            birthdayIcon.setFitHeight(iconHeight);
-            birthdayIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(birthdayIcon);
+            birthdayIcon.imageProperty().setValue(birthdayIconPhoto);
         } else {
             File defaultPhotoFile = new File(BASE_DIR + "defaultIcon");
             FileInputStream defaultFileStream = new FileInputStream(defaultPhotoFile);
             Image defaultBirthdayIconPhoto = new Image(defaultFileStream);
-            birthdayIcon = new ImageView(defaultBirthdayIconPhoto);
-            birthdayIcon.setFitHeight(iconHeight);
-            birthdayIcon.setFitWidth(iconWidth);
-            grid.getChildren().add(birthdayIcon);
+            birthdayIcon.imageProperty().setValue(defaultBirthdayIconPhoto);
         }
     }
 
@@ -243,7 +217,7 @@ public class PersonDetailsCard extends UiPart<Region> {
 
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        //logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         getSelectedPerson(event.getNewSelection().person);
     }
 }
