@@ -28,11 +28,11 @@
   <StackPane fx:id="resultDisplayPlaceholder" maxHeight="130.0" minHeight="130.0" prefHeight="130.0" styleClass="pane-with-border" VBox.vgrow="NEVER" />
 
   <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5, 0.5" VBox.vgrow="ALWAYS">
-    <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
-      <StackPane fx:id="personListPanelPlaceholder" prefWidth="384.0" VBox.vgrow="ALWAYS" />
+    <VBox fx:id="personList" minWidth="300.0" prefWidth="300.0" SplitPane.resizableWithParent="false">
+      <StackPane fx:id="personListPanelPlaceholder" prefWidth="300.0" VBox.vgrow="ALWAYS" />
     </VBox>
-      <StackPane fx:id="personDetailsPanelHolder" minWidth="200.0" prefHeight="150.0" prefWidth="200.0" />
-            <StackPane fx:id="mapsPlaceholder" prefWidth="340.0" />
+      <StackPane fx:id="personDetailsPanelHolder" minWidth="275.0" prefHeight="130.0" prefWidth="275.0" />
+            <StackPane fx:id="mapsPlaceholder" minWidth="340.0" prefWidth="340.0" />
   </SplitPane>
 
   <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
