@@ -18,3 +18,5 @@ classes/
 /bin/
 src/main/resources/docs/
 out/
+Collate-GUI.jar
+Collate-TUI.jar
