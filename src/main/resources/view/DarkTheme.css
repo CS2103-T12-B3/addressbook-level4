@@ -5,8 +5,8 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill: #262626;
     -fx-opacity: 0.9;
 }
 
@@ -98,6 +98,8 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0.5;
 }
 
 .list-cell:filled:even {
@@ -280,7 +282,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: white;
 }
 
 .scroll-bar .thumb {
@@ -290,7 +292,7 @@
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
     -fx-background-color: transparent;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 2 2 2 2;
 }
 
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
@@ -298,7 +300,7 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 2 2 2 2;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
@@ -362,4 +364,9 @@
 
 #personDetailsPanelHolder {
     -fx-background-color: white;
+    -fx-text-fill: white;
+}
+
+#name.label {
+    -fx-font-size: 34dpi;
 }
