@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Region> {
 
     //@@author aggarwalRuchir
     /**
-     * Opens the help window.
+     * Opens the Login window.
      */
     @FXML
     public void handleLogin() {
