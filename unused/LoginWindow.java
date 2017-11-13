@@ -14,9 +14,12 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FxViewUtil;
 
-
 /**
  * Controller for a login dialogue
+ * This code was not used because the validation for the following reasons:
+ *      1. a command for storing the password needs to be added first
+ *      2. a thorough validation for username and password
+ *      3. tests for the log in feature need to be added
  */
 public class LoginWindow extends UiPart<Region> {
 

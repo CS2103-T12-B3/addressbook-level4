@@ -25,6 +25,12 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 
+/**
+ * An UI component that displays information of a {@code Person}.
+ * This code was not used because the validation for the following reasons:
+ *      1. old tests related to other components (most importantly PersonCard) need to be updated
+ *      2. new tests need to be created and added for this enhancement
+ */
 public class PersonDetailsCard extends UiPart<Region> {
 
     private static final String ADDRESS_ICON_IMAGE_NAME = "address_icon.png";
