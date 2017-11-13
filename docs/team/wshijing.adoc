@@ -4,7 +4,9 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: People.connect
-People.connect is a desktop address book application used to allow people to store important information about those they care for. The user interacts with it using a CLI, and it has a GUI created although most user interactions happen using a command line interface where minimal mouse usage is required.
+People.connect is a desktop address book application. This application is catered to meet the requirements of a +
+businessman who wants to keep his business contacts at the same place and then access them quickly and efficiently. It +
+has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 
 *Code contributed*: [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/wshijing.md[Functional code]] [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/wshijing.md[Test code]]
 
@@ -56,11 +58,35 @@ include::../DeveloperGuide.adoc[tag=sortcommand]
 
 ---
 
+=== Enhancement Added: Locate
+
+==== External behavior
+
+---
+A user has the address of each contact and the locate command could assist them to route from their current location to the chosen contacts address.
+
+==== Justification
+
+---
+If we were to just locate the destination of the contacts address it would not benefit the user as much as routing the exact route the user could take from the origin to destination.
+
+==== Implementation
+
+---
+#Start of Extract [from: Developer Guide]#
+
+include::../DeveloperGuide.adoc[tag=locatecommand]
+
+#End of Extract#
+
+---
+
 === Enhancement Proposed: Sort by birthday command `sort birthday`
 
 Currently, the sort function only sorts the name. We could allow the user to sort by birthday so that the user can see upcoming birthdays shown at the top of the list.
 
 === Other contributions
 
+* Change UI background to all black theme: [https://github.com/CS2103AUG2017-T12-B3/main/pull/66[#66]]
 * Found bugs from another team's product: [https://github.com/CS2103AUG2017-W13-B1/main/issues/91[#91]]
 * Suggested enhancement for another team's product: [https://github.com/CS2103AUG2017-W13-B1/main/issues/92[#92]]
