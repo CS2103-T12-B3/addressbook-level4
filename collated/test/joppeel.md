@@ -11,27 +11,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 
 public class LoadCommandTest {
 
-    private ModelManager model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private static UserPrefs userPrefs = new UserPrefs();
+    private static String filePath = "src/test/data/LoadCommandTest/";
+    private final String totallyNewContactsFileName = "testLoadTotallyNew.xml";
+    private final String partiallyNewContactsFileName = "testLoadPartiallyNew.xml";
 
+
+    @BeforeClass
+    public static void setUserPrefs() {
+        userPrefs.setFilePath(filePath);
+    }
 
     @Test
     public void execute_newAddressBookContainsNewPersons() throws Exception {
-        AddressBook loadedAddressBook = createAddressBookWithNewPersons(getListOfNewPersons());
-        LoadCommand loadNewCommand = prepareLoadCommand(loadedAddressBook);
+        ModelManager model = new ModelManager(new AddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand(totallyNewContactsFileName, model);
         List<ReadOnlyPerson> expectedPersons = getListOfNewPersons();
         List<ReadOnlyPerson> oldPersons = model.getFilteredPersonList();
 
@@ -48,8 +57,8 @@ public class LoadCommandTest {
 
     @Test
     public void execute_newAddressBookContainsPartiallyNewPersons() throws Exception {
-        AddressBook loadedAddressBook = createAddressBookWithNewPersons(getListOfPartiallyNewPersons());
-        LoadCommand loadNewCommand = prepareLoadCommand(loadedAddressBook);
+        ModelManager model = new ModelManager(getTypicalAddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand(partiallyNewContactsFileName, model);
         List<ReadOnlyPerson> expectedPersons = getListOfPartiallyNewPersons();
         List<ReadOnlyPerson> oldPersons = model.getFilteredPersonList();
 
@@ -68,8 +77,8 @@ public class LoadCommandTest {
 
     @Test
     public void execute_loadTheExistingPersons() throws Exception {
-        AddressBook loadedAddressBook = createAddressBookWithNewPersons(model.getFilteredPersonList());
-        LoadCommand loadNewCommand = prepareLoadCommand(loadedAddressBook);
+        ModelManager model = new ModelManager(getTypicalAddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand(totallyNewContactsFileName, model);
         List<ReadOnlyPerson> expectedPersons = model.getFilteredPersonList();
 
         loadNewCommand.executeUndoableCommand();
@@ -79,20 +88,25 @@ public class LoadCommandTest {
         assertTrue(expectedPersons.containsAll(model.getFilteredPersonList()));
     }
 
+    @Test(expected = CommandException.class)
+    public void execute_loadNonexistentAddressBook() throws CommandException {
+        ModelManager model = new ModelManager(new AddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand("nonexistenfile123.xml", model);
+        loadNewCommand.executeUndoableCommand();
+    }
 
     @Test
     public void equals() {
 
-        AddressBook typicalAddressBook = getTypicalAddressBook();
-        AddressBook newAddressBook = createAddressBookWithNewPersons(getListOfNewPersons());
-        LoadCommand loadTypicalCommand = prepareLoadCommand(typicalAddressBook);
-        LoadCommand loadNewCommand = prepareLoadCommand(newAddressBook);
+        ModelManager model = new ModelManager(new AddressBook(), userPrefs);
+        LoadCommand loadTypicalCommand = prepareLoadCommand(totallyNewContactsFileName, model);
+        LoadCommand loadNewCommand = prepareLoadCommand("notATestFile.xml", model);
 
         // same object -> returns true
         assertTrue(loadTypicalCommand.equals(loadTypicalCommand));
 
         // same values -> returns true
-        LoadCommand loadTypicalCommandCopy = prepareLoadCommand(typicalAddressBook);
+        LoadCommand loadTypicalCommandCopy = prepareLoadCommand(totallyNewContactsFileName, model);
         assertTrue(loadTypicalCommand.equals(loadTypicalCommandCopy));
 
         // different types -> returns false
@@ -105,68 +119,34 @@ public class LoadCommandTest {
         assertFalse(loadTypicalCommand.equals(loadNewCommand));
     }
 
-
     /**
      * Creates new instance of LoadCommand, the parameter represents the address book
      * that will be loaded to the existing address book.
      */
-    private LoadCommand prepareLoadCommand(AddressBook addressBook) {
-        LoadCommand loadCommand = new LoadCommand(addressBook);
-        loadCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+    private LoadCommand prepareLoadCommand(String fileName, ModelManager model) {
+        LoadCommand loadCommand = new LoadCommand(fileName);
+        loadCommand.setData(model, userPrefs, new CommandHistory(), new UndoRedoStack());
         return loadCommand;
-    }
-
-    /**
-     * Creates new instance of AddressBook with persons that are not included
-     * in the typical address book.
-     */
-    private AddressBook createAddressBookWithNewPersons(List<ReadOnlyPerson> persons) {
-        AddressBook addressBook = new AddressBook();
-
-        for (ReadOnlyPerson person : persons) {
-            try {
-                addressBook.addPerson(person);
-            } catch (DuplicatePersonException e) {
-                assert false : "Not possible";
-            }
-        }
-        return addressBook;
     }
 
     /**
      * Returns list of completely new example persons
      */
     private List<ReadOnlyPerson> getListOfNewPersons() {
-
-        ReadOnlyPerson mark = new PersonBuilder().withName("Mark Long")
-                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("mark@example.com")
-                .withPhone("85355255").withBirthday("13/12/2001").withTags("friends").build();
-        ReadOnlyPerson julia = new PersonBuilder().withName("Julia Gordon")
-                .withAddress("311, Clementi Ave 2, #02-25").withEmail("julia@example.com")
-                .withPhone("98765432").withBirthday("03/02/2011").withTags("owesMoney", "friends").build();
-        ReadOnlyPerson harvey = new PersonBuilder().withName("Harvey Ross").withPhone("95352563")
-                .withEmail("harvey@example.com").withAddress("wall street").withBirthday("09/06/1993").build();
-        ReadOnlyPerson sam = new PersonBuilder().withName("Sam West").withPhone("87652533")
-                .withEmail("sam@example.com").withAddress("10th street").withBirthday("01/09/1992").build();
-
-        return new ArrayList<>(Arrays.asList(mark, julia, harvey, sam));
+        return TypicalPersons.getTypicalPersons();
     }
 
     /**
-     * Returns list of completely new example persons
+     * Returns a list of ReadOnlyPersons that are partially included
+     * in the list returned by {@code getListOfNewPersons}
      */
     private List<ReadOnlyPerson> getListOfPartiallyNewPersons() {
+        ReadOnlyPerson fiona = TypicalPersons.FIONA;
+        ReadOnlyPerson george = TypicalPersons.GEORGE;
+        ReadOnlyPerson amy = TypicalPersons.AMY;
+        ReadOnlyPerson bob = TypicalPersons.BOB;
 
-        ReadOnlyPerson fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-                .withEmail("lydia@example.com").withAddress("little tokyo").withBirthday("24/12/1994").build();
-        ReadOnlyPerson george = new PersonBuilder().withName("George Best").withPhone("9482442")
-                .withEmail("anna@example.com").withAddress("4th street").withBirthday("31/12/1999").build();
-        ReadOnlyPerson harvey = new PersonBuilder().withName("Harvey Ross").withPhone("95352563")
-                .withEmail("harvey@example.com").withAddress("wall street").withBirthday("09/06/1993").build();
-        ReadOnlyPerson sam = new PersonBuilder().withName("Sam West").withPhone("87652533")
-                .withEmail("sam@example.com").withAddress("10th street").withBirthday("01/09/1992").build();
-
-        return new ArrayList<>(Arrays.asList(fiona, george, harvey, sam));
+        return new ArrayList<>(Arrays.asList(fiona, george, amy, bob));
     }
 
 }
@@ -175,52 +155,33 @@ public class LoadCommandTest {
 ``` java
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.address.logic.commands.LoadCommand;
 
 public class LoadCommandParserTest {
 
-    private static String fileName = "sampleData.xml";
-    private static String testFileName = "sampleDataForTheTests.xml";
-    private static Path source = Paths.get("src/test/data/sandbox/" + fileName);
-    private static Path destination = Paths.get("data/" + testFileName);
     private LoadCommandParser parser = new LoadCommandParser();
-
-    /**
-     * Executed before testing, copies the sample data to the correct directory
-     */
-    @BeforeClass
-    public static void copyTestData() throws Exception {
-        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-    }
-
-    /**
-     * Executed after testing, removes the sample data
-     */
-    @AfterClass
-    public static void deleteTestData() throws Exception {
-        Files.delete(destination);
-    }
-
 
     @Test
     public void parse_failure() throws Exception {
-        String expectedMessage = String.format(LoadCommand.MESSAGE_ERROR_LOADING_ADDRESSBOOK,
-                LoadCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE);
 
-        // test with incorrect file name
-        assertParseFailure(parser, "notAFile123456.xml", expectedMessage);
+        // test with empty string
+        assertParseFailure(parser, " ", expectedMessage);
     }
+
+    @Test
+    public void parse_success() throws Exception {
+        LoadCommand expectedCommand = new LoadCommand("testbook.xml");
+
+        assertParseSuccess(parser, "testbook.xml", expectedCommand);
+    }
+
 
 }
 ```
@@ -236,8 +197,8 @@ import org.junit.Test;
 public class BirthdayTest {
 
     @Test
-    public void isValidEmail() {
-        // blank email
+    public void isValidBirthday() {
+        // blank birthday
         assertFalse(Birthday.isValidBirthday("")); // empty string
         assertFalse(Birthday.isValidBirthday(" ")); // spaces only
 
@@ -252,12 +213,14 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("q/qw/qweq")); // using letters instead of numbers
         assertFalse(Birthday.isValidBirthday("000/99/2323")); // too many numbers for the day
         assertFalse(Birthday.isValidBirthday("23 /12/1122")); // space between
+        assertFalse(Birthday.isValidBirthday("29/02/2009")); // not a leap day
 
-        // valid email
+        // valid birthday
         assertTrue(Birthday.isValidBirthday("11/12/1099"));
         assertTrue(Birthday.isValidBirthday("09/03/2010"));
-        assertTrue(Birthday.isValidBirthday("12/13/1009"));   // also accepts months which don't exists
-        assertTrue(Birthday.isValidBirthday("00/00/2011"));
+        assertTrue(Birthday.isValidBirthday("08/11/1992"));
+        assertTrue(Birthday.isValidBirthday("29/02/2008")); // lead day
+
     }
 }
 ```
@@ -296,66 +259,33 @@ public class BirthdayTest {
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.address.logic.commands.LoadCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.storage.XmlAddressBookStorage;
 
 public class LoadCommandSystemTest extends AddressBookSystemTest {
 
-    private static String testFileName = "sampleDataForTheTests.xml";
-    private static Path destination = Paths.get("data/" + testFileName);
-
-    @BeforeClass
-    public static void createTestFile() throws Exception {
-        new File(destination.toString());
-    }
-
-    @AfterClass
-    public static void deleteTestFile() throws Exception {
-        Files.delete(destination);
-    }
+    private final String totallyNewContactsFileName = "testLoadTotallyNew.xml";
 
     @Test
     public void load_success() throws Exception {
 
-        ArrayList newPersons = new ArrayList<>(Arrays.asList(AMY, BOB));
-        addInfoToTestFile(newPersons);
-        String command = LoadCommand.COMMAND_WORD + " " + testFileName;
+        List<ReadOnlyPerson> newPersons = getTypicalPersons();
+        String command = LoadCommand.COMMAND_WORD + " " + totallyNewContactsFileName;
 
         // try to load new address book, should load new persons
         assertCommandSuccess(command, newPersons);
 
-        // try to load the same address book again, shouldn't add new persons
+        //try to load the same address book again, shouldn't add new persons
         assertCommandSuccess(command, new ArrayList());
-
-        deleteTestFile();
-        createTestFile();
-
-        ArrayList partiallyNewPersons = new ArrayList<>(Arrays.asList(AMY, ALICE));
-        addInfoToTestFile(partiallyNewPersons);
-
-        // try to load partially new persons, AMY is already in the address book
-        assertCommandSuccess(command, new ArrayList(Arrays.asList(ALICE)));
 
     }
 
@@ -369,34 +299,6 @@ public class LoadCommandSystemTest extends AddressBookSystemTest {
         // test without giving any parameters
         command = LoadCommand.COMMAND_WORD;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
-    }
-
-    /**
-     * Creates new xml file, adds contacts from {@code addressBook} to the test file
-     */
-    public void addTestDataToFile(ReadOnlyAddressBook addressBook) throws Exception {
-        XmlAddressBookStorage storage = new XmlAddressBookStorage(destination.toString());
-        storage.saveAddressBook(addressBook, destination.toString());
-    }
-
-    /**
-     * Creates a new instance of address book and adds contacts from {@code personsToAdd}
-     */
-    public AddressBook createAddressBook(List<ReadOnlyPerson> personsToAdd) throws Exception {
-        AddressBook addressBook = new AddressBook();
-
-        for (ReadOnlyPerson person : personsToAdd) {
-            addressBook.addPerson(person);
-        }
-        return addressBook;
-    }
-
-    /**
-     * Adds {@code personToAdd} to an XML file
-     */
-    public void addInfoToTestFile(List<ReadOnlyPerson> personsToAdd) throws Exception {
-        AddressBook addressBook = createAddressBook(personsToAdd);
-        addTestDataToFile(addressBook);
     }
 
     /**
