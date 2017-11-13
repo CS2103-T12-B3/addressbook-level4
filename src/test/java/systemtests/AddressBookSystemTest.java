@@ -90,6 +90,7 @@ public abstract class AddressBookSystemTest {
         return mainWindowHandle.getMainMenu();
     }
 
+    //@@author wshijing
     public MapsPanelHandle getMapsPanel() {
         return mainWindowHandle.getMapsPanel();
     }
@@ -141,7 +142,7 @@ public abstract class AddressBookSystemTest {
         assert getPersonListPanel().getSelectedCardIndex() == index.getZeroBased();
     }
 
-
+    //@@author wshijing
     /**
      * Locate the person address at {@code index} of the displayed list.
      */

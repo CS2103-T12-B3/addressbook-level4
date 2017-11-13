@@ -126,6 +126,7 @@ public class AddressBookParserTest {
         assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
     }
 
+    //@@author wshijing
     @Test
     public void parseCommand_locate() throws Exception {
         LocateCommand command = (LocateCommand) parser.parseCommand(

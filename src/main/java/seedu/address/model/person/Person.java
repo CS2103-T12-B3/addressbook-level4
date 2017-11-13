@@ -120,6 +120,7 @@ public class Person implements ReadOnlyPerson {
         return birthday.get();
     }
 
+    //@@author wshijing
     public void setPhoto(Photo photo) {
         this.photo.set(requireNonNull(photo));
     }

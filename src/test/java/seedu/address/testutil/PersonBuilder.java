@@ -125,6 +125,7 @@ public class PersonBuilder {
         return this;
     }
 
+    //@@author wshijing
     /**
      * Sets the {@code Photo} of the {@code Person} that we are building.
      */
