@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<!-- @@author aggarwalRuchir-unused -->
+<VBox fx:id="personPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="photo" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets left="50.0" top="20.0" />
+         </VBox.margin>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <Label fx:id="name" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" text="Name" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="10.0" left="50.0" top="10.0" />
+         </VBox.margin>
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Line endX="180.0" startX="-100.0" strokeWidth="0.5">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </Line>
+      <HBox fx:id="phoneBox" prefHeight="40.0" prefWidth="288.0">
+         <children>
+            <ImageView fx:id="phoneIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="phone" prefWidth="480.0" text="Phone">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Line endX="180.0" startX="-100.0" stroke="#323232" strokeWidth="0.5">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </Line>
+      <HBox fx:id="addressBox" prefHeight="40.0" prefWidth="288.0">
+         <children>
+            <ImageView fx:id="addressIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="address" prefWidth="380.0" text="Address">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Line endX="180.0" startX="-100.0" strokeWidth="0.5">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </Line>
+      <HBox fx:id="emailBox" prefHeight="40.0" prefWidth="276.0">
+         <children>
+            <ImageView fx:id="emailIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="email" prefWidth="380.0" text="Email">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Line endX="180.0" startX="-100.0" strokeWidth="0.5">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </Line>
+      <HBox fx:id="birthdayBox" prefHeight="40.0" prefWidth="328.0">
+         <children>
+            <ImageView fx:id="birthdayIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="birthday" prefWidth="380.0" text="Birthday">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Line endX="180.0" startX="-100.0" strokeWidth="0.5">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </Line>
+      <HBox fx:id="tagsBox" prefHeight="40.0" prefWidth="300.0">
+         <children>
+            <Label fx:id="taglabel" prefHeight="29.0" prefWidth="51.0" text="Tags">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <FlowPane fx:id="tags" prefHeight="100.0" prefWidth="200.0">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </FlowPane>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="10.0" top="5.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
