@@ -11,7 +11,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Photo {
 
-    public static final String MESSAGE_PHOTO_CONSTRAINTS = "Person's photo should be in format: nameOfFile.png";
+    public static final String MESSAGE_PHOTO_CONSTRAINTS = "Person's photo should be in format: nameOfFile.png/" +
+            "nameOfFile.jpg/nameOfFile.gif/nameOfFile.bmp";
 
     public static final String PHOTO_VALIDATION_REGEX = "([^\\s]+(\\.(?i)(jpg|png|gif|bmp))$)";
 
