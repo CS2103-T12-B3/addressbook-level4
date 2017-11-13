@@ -82,7 +82,7 @@ include::../DeveloperGuide.adoc[tag=phoneConvention]
 
 #Start of Extract [from: User Guide]#
 
-include::../UserGuide.adoc[tag=lockaddressbook]
+include::../UserGuide.adoc[tag=lockAddressbook]
 
 #End of Extract#
 
