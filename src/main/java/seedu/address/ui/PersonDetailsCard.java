@@ -93,6 +93,7 @@ public class PersonDetailsCard extends UiPart<Region> {
         }
         registerAsAnEventHandler(this);
     }
+    //@@author
 
     /**
      * Binds the individual UI elements to observe their respective {@code Person} properties
@@ -137,6 +138,7 @@ public class PersonDetailsCard extends UiPart<Region> {
         }
     }
 
+    //@@author aggarwalRuchir-unused
     /**
      * Initialise each tag and assign a unique color
      */
@@ -261,3 +263,4 @@ public class PersonDetailsCard extends UiPart<Region> {
     }
 
 }
+//@@author
