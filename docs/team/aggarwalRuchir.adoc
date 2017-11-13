@@ -4,7 +4,9 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :stylesDir: ../stylesheets
 
 == Project: People.connect - Level 4
-People.connect is a desktop address book application. This application allows users to store important information about the people they care about. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+People.connect is a desktop address book application. This application is catered to meet the requirements of a +
+businessman who wants to keep his business contacts at the same place and then access them quickly and efficiently. It +
+has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 
 *Code contributed*: [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/aggarwalRuchir.md[Functional code]] [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/aggarwalRuchir.md[Test code]] [https://github.com/aggarwalRuchir/addressbook-level4/blob/ReworkUI/collated/unused/aggarwalRuchir-unused.md[Unused code]]
 
@@ -23,9 +25,10 @@ include::../UserGuide.adoc[tag=list]
 
 ==== Justification
 
-Sometimes the user may require to find people that belong to a certain category. An example can be a student trying to find fellow contacts with tag 'CS2103' in the app. +
-In this case, using a find command will not be feasible since it uses name as its arguments but students can have different names in our case. Hence, using list command +
-makes more sense. Hence, instead of listing the entire address book, I have implemented the list feature by tag.
+Sometimes the user may require to find people that belong to a certain category. An example can be a student trying to +
+find fellow contacts with tag 'CS2103' in the app. In this case, using a find command will not be feasible since it +
+uses name as its arguments but students can have different names in our case. Hence, using list command makes more +
+sense. Hence, instead of listing the entire address book, I have implemented the list feature by tag.
 
 ==== Implementation
 
@@ -87,9 +90,9 @@ include::../UserGuide.adoc[tag=lockaddressbook]
 
 ==== Justification
 
-Since the app has a feature of hiding certain fields about a person, if the addressbook is not locked, any person can access those +
-details using 'viewall' command which would leave the point of hiding details useless. Hence, adding a level of security +
-will be a good feature to implement.
+Since the app has a feature of hiding certain fields about a person, if the addressbook is not locked, any person can +
+access those details using 'viewall' command which would leave the point of hiding details useless. Hence, adding a +
+level of security will be a good feature to implement.
 
 === Enhancement Proposed: Update GUI
 
@@ -110,9 +113,9 @@ include::../UserGuide.adoc[tag=updateGUI]
 People.Connect is targeted for businessmen. So a simple yet elegant user interface will attract more users. The user +
 should not strain himself to lok at the details of the person and that's why it is intended that we remove the details +
 from person card and add a separate pane where all the details can be shown with much larger size making it easier +
-for the user to se ethe data without any stress. The theme is not bright but dark with subtle mix of blue added through+
-google maps which complements the overall look of the app. Also, the image of the person is intended to be shown in a +
-circular shape rather than a square.
+for the user to se ethe data without any stress. The theme is not bright but dark with subtle mix of blue added +
+through google maps which complements the overall look of the app. Also, the image of the person is intended to be +
+shown in a circular shape rather than a square.
 
 === Other contributions
 
