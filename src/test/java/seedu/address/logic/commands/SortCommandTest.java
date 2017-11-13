@@ -27,7 +27,7 @@ public class SortCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         sortCommand = new SortCommand();
-        sortCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        sortCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
     }
 
     @Test

@@ -47,7 +47,7 @@ public class ListCommandTest {
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         listCommand = new ListCommand();
-        listCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        listCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
     }
 
     @Test
@@ -71,13 +71,13 @@ public class ListCommandTest {
 
         // test command with single valid tag argument
         ListCommand firstListCommand = new ListCommand(firstPredicate);
-        firstListCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        firstListCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
         assertCommandSuccess(firstListCommand, model, ListCommand.MESSAGE_SUCCESS_FILTEREDLIST
                 + TAG_DESC_FRIENDS, expectedModel);
 
         firstPredicate = createNewPersonPredicateForSingleTag(new Tag(VALID_TAG_2));
         ListCommand secondListCommand = new ListCommand(firstPredicate);
-        secondListCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        secondListCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
         expectedModel.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList("Benson")));
         assertCommandSuccess(secondListCommand, model, ListCommand.MESSAGE_SUCCESS_FILTEREDLIST
                 + TAG_DESC_OWESMONEY, expectedModel);
@@ -85,7 +85,7 @@ public class ListCommandTest {
         // test command with multiple valid tag arguments
         ListCommand thirdListCommand = new ListCommand(secondPredicate);
         reInitializeModels();
-        thirdListCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        thirdListCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
         expectedModel.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList("Benson", "Fiona",
                 "George")));
         assertCommandSuccess(thirdListCommand, model, ListCommand.MESSAGE_SUCCESS_FILTEREDLIST
@@ -102,7 +102,7 @@ public class ListCommandTest {
 
         // test command with single invalid tag argument
         ListCommand firstListCommand = new ListCommand(firstPredicate);
-        firstListCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        firstListCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
         expectedModel.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList()));
         assertCommandSuccess(firstListCommand, model, ListCommand.MESSAGE_NOENTRIESFOUND, expectedModel);
 
@@ -110,7 +110,7 @@ public class ListCommandTest {
 
         // test command with multiple invalid tag arguments
         ListCommand secondListCommand = new ListCommand(secondPredicate);
-        secondListCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        secondListCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
         expectedModel.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList()));
         assertCommandSuccess(secondListCommand, model, ListCommand.MESSAGE_NOENTRIESFOUND, expectedModel);
     }

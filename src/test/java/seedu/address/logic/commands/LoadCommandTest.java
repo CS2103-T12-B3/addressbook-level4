@@ -8,27 +8,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 
 public class LoadCommandTest {
 
-    private ModelManager model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private static UserPrefs userPrefs = new UserPrefs();
+    private static String filePath = "src/test/data/LoadCommandTest/";
+    private final String totallyNewContactsFileName = "testLoadTotallyNew.xml";
+    private final String partiallyNewContactsFileName = "testLoadPartiallyNew.xml";
 
+
+    @BeforeClass
+    public static void setUserPrefs() {
+        userPrefs.setFilePath(filePath);
+    }
 
     @Test
     public void execute_newAddressBookContainsNewPersons() throws Exception {
-        AddressBook loadedAddressBook = createAddressBookWithNewPersons(getListOfNewPersons());
-        LoadCommand loadNewCommand = prepareLoadCommand(loadedAddressBook);
+        ModelManager model = new ModelManager(new AddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand(totallyNewContactsFileName, model);
         List<ReadOnlyPerson> expectedPersons = getListOfNewPersons();
         List<ReadOnlyPerson> oldPersons = model.getFilteredPersonList();
 
@@ -45,8 +54,8 @@ public class LoadCommandTest {
 
     @Test
     public void execute_newAddressBookContainsPartiallyNewPersons() throws Exception {
-        AddressBook loadedAddressBook = createAddressBookWithNewPersons(getListOfPartiallyNewPersons());
-        LoadCommand loadNewCommand = prepareLoadCommand(loadedAddressBook);
+        ModelManager model = new ModelManager(getTypicalAddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand(partiallyNewContactsFileName, model);
         List<ReadOnlyPerson> expectedPersons = getListOfPartiallyNewPersons();
         List<ReadOnlyPerson> oldPersons = model.getFilteredPersonList();
 
@@ -65,8 +74,8 @@ public class LoadCommandTest {
 
     @Test
     public void execute_loadTheExistingPersons() throws Exception {
-        AddressBook loadedAddressBook = createAddressBookWithNewPersons(model.getFilteredPersonList());
-        LoadCommand loadNewCommand = prepareLoadCommand(loadedAddressBook);
+        ModelManager model = new ModelManager(getTypicalAddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand(totallyNewContactsFileName, model);
         List<ReadOnlyPerson> expectedPersons = model.getFilteredPersonList();
 
         loadNewCommand.executeUndoableCommand();
@@ -76,20 +85,25 @@ public class LoadCommandTest {
         assertTrue(expectedPersons.containsAll(model.getFilteredPersonList()));
     }
 
+    @Test(expected = CommandException.class)
+    public void execute_loadNonexistentAddressBook() throws CommandException {
+        ModelManager model = new ModelManager(new AddressBook(), userPrefs);
+        LoadCommand loadNewCommand = prepareLoadCommand("nonexistenfile123.xml", model);
+        loadNewCommand.executeUndoableCommand();
+    }
 
     @Test
     public void equals() {
 
-        AddressBook typicalAddressBook = getTypicalAddressBook();
-        AddressBook newAddressBook = createAddressBookWithNewPersons(getListOfNewPersons());
-        LoadCommand loadTypicalCommand = prepareLoadCommand(typicalAddressBook);
-        LoadCommand loadNewCommand = prepareLoadCommand(newAddressBook);
+        ModelManager model = new ModelManager(new AddressBook(), userPrefs);
+        LoadCommand loadTypicalCommand = prepareLoadCommand(totallyNewContactsFileName, model);
+        LoadCommand loadNewCommand = prepareLoadCommand("notATestFile.xml", model);
 
         // same object -> returns true
         assertTrue(loadTypicalCommand.equals(loadTypicalCommand));
 
         // same values -> returns true
-        LoadCommand loadTypicalCommandCopy = prepareLoadCommand(typicalAddressBook);
+        LoadCommand loadTypicalCommandCopy = prepareLoadCommand(totallyNewContactsFileName, model);
         assertTrue(loadTypicalCommand.equals(loadTypicalCommandCopy));
 
         // different types -> returns false
@@ -102,68 +116,34 @@ public class LoadCommandTest {
         assertFalse(loadTypicalCommand.equals(loadNewCommand));
     }
 
-
     /**
      * Creates new instance of LoadCommand, the parameter represents the address book
      * that will be loaded to the existing address book.
      */
-    private LoadCommand prepareLoadCommand(AddressBook addressBook) {
-        LoadCommand loadCommand = new LoadCommand(addressBook);
-        loadCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+    private LoadCommand prepareLoadCommand(String fileName, ModelManager model) {
+        LoadCommand loadCommand = new LoadCommand(fileName);
+        loadCommand.setData(model, userPrefs, new CommandHistory(), new UndoRedoStack());
         return loadCommand;
-    }
-
-    /**
-     * Creates new instance of AddressBook with persons that are not included
-     * in the typical address book.
-     */
-    private AddressBook createAddressBookWithNewPersons(List<ReadOnlyPerson> persons) {
-        AddressBook addressBook = new AddressBook();
-
-        for (ReadOnlyPerson person : persons) {
-            try {
-                addressBook.addPerson(person);
-            } catch (DuplicatePersonException e) {
-                assert false : "Not possible";
-            }
-        }
-        return addressBook;
     }
 
     /**
      * Returns list of completely new example persons
      */
     private List<ReadOnlyPerson> getListOfNewPersons() {
-
-        ReadOnlyPerson mark = new PersonBuilder().withName("Mark Long")
-                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("mark@example.com")
-                .withPhone("85355255").withBirthday("13/12/2001").withTags("friends").build();
-        ReadOnlyPerson julia = new PersonBuilder().withName("Julia Gordon")
-                .withAddress("311, Clementi Ave 2, #02-25").withEmail("julia@example.com")
-                .withPhone("98765432").withBirthday("03/02/2011").withTags("owesMoney", "friends").build();
-        ReadOnlyPerson harvey = new PersonBuilder().withName("Harvey Ross").withPhone("95352563")
-                .withEmail("harvey@example.com").withAddress("wall street").withBirthday("09/06/1993").build();
-        ReadOnlyPerson sam = new PersonBuilder().withName("Sam West").withPhone("87652533")
-                .withEmail("sam@example.com").withAddress("10th street").withBirthday("01/09/1992").build();
-
-        return new ArrayList<>(Arrays.asList(mark, julia, harvey, sam));
+        return TypicalPersons.getTypicalPersons();
     }
 
     /**
-     * Returns list of completely new example persons
+     * Returns a list of ReadOnlyPersons that are partially included
+     * in the list returned by {@code getListOfNewPersons}
      */
     private List<ReadOnlyPerson> getListOfPartiallyNewPersons() {
+        ReadOnlyPerson fiona = TypicalPersons.FIONA;
+        ReadOnlyPerson george = TypicalPersons.GEORGE;
+        ReadOnlyPerson amy = TypicalPersons.AMY;
+        ReadOnlyPerson bob = TypicalPersons.BOB;
 
-        ReadOnlyPerson fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-                .withEmail("lydia@example.com").withAddress("little tokyo").withBirthday("24/12/1994").build();
-        ReadOnlyPerson george = new PersonBuilder().withName("George Best").withPhone("9482442")
-                .withEmail("anna@example.com").withAddress("4th street").withBirthday("31/12/1999").build();
-        ReadOnlyPerson harvey = new PersonBuilder().withName("Harvey Ross").withPhone("95352563")
-                .withEmail("harvey@example.com").withAddress("wall street").withBirthday("09/06/1993").build();
-        ReadOnlyPerson sam = new PersonBuilder().withName("Sam West").withPhone("87652533")
-                .withEmail("sam@example.com").withAddress("10th street").withBirthday("01/09/1992").build();
-
-        return new ArrayList<>(Arrays.asList(fiona, george, harvey, sam));
+        return new ArrayList<>(Arrays.asList(fiona, george, amy, bob));
     }
 
 }
