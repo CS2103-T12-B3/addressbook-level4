@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>Brad Pitt</name>
+        <phone>17653716262</phone>
+        <email>bpitt@gmail.com</email>
+        <address>132, Beverly Hills, #02-145</address>
+        <birthday>1/12/1975</birthday>
+        <photo>BradPitt.jpg</photo>
+        <tagged>celebrity</tagged>
+    </persons>
+    <persons>
+        <name>John Doe</name>
+        <phone>6599887766</phone>
+        <email>johndoe@hotmail.com</email>
+        <address>225, Ang Mo Kio Ave 5,#19-198</address>
+        <birthday>19/02/1965</birthday>
+        <photo>template.png</photo>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Baby Driver</name>
+        <phone>19247448118</phone>
+        <email>baby@gmail.com</email>
+        <address>926b, Los Angeles, #09-124</address>
+        <birthday>1/5/1990</birthday>
+        <photo>template.png</photo>
+        <tagged>private</tagged>
+    </persons>
+    <tags>celebrity</tags>
+    <tags>friends</tags>
+    <tags>private</tags>
+</addressbook>
