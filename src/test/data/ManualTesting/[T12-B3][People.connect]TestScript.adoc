@@ -25,6 +25,7 @@ Expected results are contained here
 . Create a path `src/main/resources/` in the `people.connect` folder +
 . Create a folder `person_photos` in the current path `.../people.connect/src/main/resources/` +
 . Place the downloaded images provided into `person_photos` folder +
+. Make sure that newAddressbook.xml is in the folder "data/" +
 . Launch the application
 
 

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>Alex Plant</name>
+        <phone>34392294</phone>
+        <email>alexplant@example.com</email>
+        <address>Utown Road 20</address>
+        <birthday>04/10/1940</birthday>
+        <photo>alex.jpg</photo>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Alison Acker</name>
+        <phone>2343838</phone>
+        <email>alisonacker@example.com</email>
+        <address>111, University road 2</address>
+        <birthday>01/11/1992</birthday>
+        <photo>alison.jpg</photo>
+    </persons>
+    <persons>
+        <name>Brad Pitt</name>
+        <phone>17653716262</phone>
+        <email>bpitt@gmail.com</email>
+        <address>132, Beverly Hills, #02-145</address>
+        <birthday>01/12/1975</birthday>
+        <photo>bob.jpg</photo>
+        <tagged>celebrity</tagged>
+    </persons>
+    <persons>
+        <name>Lucas Wilhelm</name>
+        <phone>19247448118</phone>
+        <email>lucas@gmail.com</email>
+        <address>926b, Los Angeles, #09-124</address>
+        <birthday>01/05/1990</birthday>
+        <photo>template.png</photo>
+        <tagged>customer</tagged>
+    </persons>
+    <persons>
+        <name>Barry West</name>
+        <phone>34392294</phone>
+        <email>barrywest@example.com</email>
+        <address>345, Pasir Panjang Park 9, #02-32</address>
+        <birthday>09/09/1999</birthday>
+        <photo>template.png</photo>
+        <tagged>customer</tagged>
+    </persons>
+    <persons>
+        <name>Chloe Bennett</name>
+        <phone>82949249</phone>
+        <email>chloebennett@example.com</email>
+        <address>Actor Road 23</address>
+        <birthday>29/03/1982</birthday>
+        <photo>template.png</photo>
+        <tagged>actor</tagged>
+        <tagged>celebrity</tagged>
+    </persons>
+    <persons>
+        <name>Dean Winchester</name>
+        <phone>23424554</phone>
+        <email>deanwinchester@example.com</email>
+        <address>Imaginary Road 23</address>
+        <birthday>01/02/1968</birthday>
+        <photo>template.png</photo>
+        <tagged>boss</tagged>
+    </persons>
+    <persons>
+        <name>Dominic Buyers</name>
+        <phone>394829348</phone>
+        <email>dominicbuyerst@example.com</email>
+        <address>44, Dream Street 2, #05-32</address>
+        <birthday>31/12/1993</birthday>
+        <photo>template.png</photo>
+    </persons>
+    <persons>
+        <name>Ed Baine</name>
+        <phone>12349863</phone>
+        <email>edbaine@example.com</email>
+        <address>11, Clarke Quay Ave 2, #01-11</address>
+        <birthday>21/07/1987</birthday>
+        <photo>template.png</photo>
+    </persons>
+    <persons>
+        <name>Emogen Benton</name>
+        <phone>2394930</phone>
+        <email>emogenbenton@example.com</email>
+        <address>333, Holland Village Street 2, #22-02</address>
+        <birthday>23/12/1992</birthday>
+        <photo>JackBlack.jpg</photo>
+        <tagged>boss</tagged>
+    </persons>
+    <persons>
+        <name>Elon Musk</name>
+        <phone>92837283</phone>
+        <email>elonmusk@example.com</email>
+        <address>Silicon Valley Street 23</address>
+        <birthday>22/02/1965</birthday>
+        <photo>template.png</photo>
+        <tagged>celebrity</tagged>
+    </persons>
+    <persons>
+        <name>Elton John</name>
+        <phone>23343456</phone>
+        <email>eltonjohn@example.com</email>
+        <address>Hollywood street 2</address>
+        <birthday>01/01/1930</birthday>
+        <photo>template.png</photo>
+        <tagged>celebrity</tagged>
+    </persons>
+    <persons>
+        <name>Hadwin Barrett</name>
+        <phone>23342345</phone>
+        <email>hadwinbarrett@example.com</email>
+        <address>23 Singapore Ave</address>
+        <birthday>03/02/1950</birthday>
+        <photo>template.png</photo>
+        <tagged>lawyer</tagged>
+    </persons>
+    <persons>
+        <name>Iris East</name>
+        <phone>38291034</phone>
+        <email>iriseast@example.com</email>
+        <address>357, New Bridge Road 2, #54-02</address>
+        <birthday>23/02/1992</birthday>
+        <photo>template.png</photo>
+        <tagged>colleague</tagged>
+    </persons>
+    <persons>
+        <name>John Doe</name>
+        <phone>6599887766</phone>
+        <email>johndoe@hotmail.com</email>
+        <address>225, Ang Mo Kio Ave 5,#19-198</address>
+        <birthday>19/02/1999</birthday>
+        <photo>Amy.jpg</photo>
+        <tagged>colleague</tagged>
+    </persons>
+    <persons>
+        <name>Jane Doe</name>
+        <phone>98765432</phone>
+        <email>janed@example.com</email>
+        <address>311, Penang Ave 1, #02-25</address>
+        <birthday>21/12/1993</birthday>
+        <photo>jane.jpg</photo>
+        <tagged>owesMoney</tagged>
+        <tagged>colleague</tagged>
+    </persons>
+    <persons>
+        <name>Jenny Matheson</name>
+        <phone>38481035</phone>
+        <email>jennyplant@example.com</email>
+        <address>Prince George's Park 27</address>
+        <birthday>09/01/1950</birthday>
+        <photo>jenny.jpg</photo>
+        <tagged>colleague</tagged>
+    </persons>
+    <persons>
+        <name>Kygo</name>
+        <phone>23480293</phone>
+        <email>kygo@example.com</email>
+        <address>311, Artist Ave 2, #02-25</address>
+        <birthday>21/12/1980</birthday>
+        <photo>template.png</photo>
+        <tagged>celebrity</tagged>
+        <tagged>artist</tagged>
+    </persons>
+    <persons>
+        <name>Morgan Freeman</name>
+        <phone>34325235</phone>
+        <email>morganfreeman@example.com</email>
+        <address>Freeman Road 23</address>
+        <birthday>18/04/1950</birthday>
+        <photo>template.png</photo>
+        <tagged>actor</tagged>
+    </persons>
+    <persons>
+        <name>Sam Winchester</name>
+        <phone>29039302</phone>
+        <email>samwinchester@example.com</email>
+        <address>Imaginary Road 23</address>
+        <birthday>19/07/1970</birthday>
+        <photo>template.png</photo>
+        <tagged>boss</tagged>
+    </persons>
+    <persons>
+        <name>Will Smith</name>
+        <phone>34249898</phone>
+        <email>willsmith@example.com</email>
+        <address>223, Buona Vista Road 3, #01-25</address>
+        <birthday>21/02/2001</birthday>
+        <photo>123.png</photo>
+        <tagged>customer</tagged>
+    </persons>
+    <persons>
+        <name>John Doe</name>
+        <phone>98765432</phone>
+        <email>johnd@example.com</email>
+        <address>311, Clementi Ave 2, #02-25</address>
+        <birthday>21/12/1993</birthday>
+        <photo>johnD.jpg</photo>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Angelina Jolie</name>
+        <phone>23442344</phone>
+        <email>ajolie@gmail.com</email>
+        <address>132, Beverly Hills, #02-145</address>
+        <birthday>01/11/1973</birthday>
+        <photo>template.png</photo>
+        <tagged>celebrity</tagged>
+    </persons>
+    <persons>
+        <name>Charlie Hopper</name>
+        <phone>34893920</phone>
+        <email>charlieh@gmail.com</email>
+        <address>926b, Los Angeles, #09-124</address>
+        <birthday>01/02/1990</birthday>
+        <photo>template.png</photo>
+        <tagged>private</tagged>
+    </persons>
+    <persons>
+        <name>Phoebe Geller</name>
+        <phone>4534355</phone>
+        <email>pheobegeller@hotmail.com</email>
+        <address>225, Ang Mo Kio Ave 5,#19-198</address>
+        <birthday>19/02/1980</birthday>
+        <photo>phoebe.jpg</photo>
+    </persons>
+    <tags>bestFriend</tags>
+    <tags>actor</tags>
+    <tags>celebrity</tags>
+    <tags>owesMoney</tags>
+    <tags>private</tags>
+    <tags>boss</tags>
+    <tags>artist</tags>
+    <tags>colleague</tags>
+    <tags>friends</tags>
+    <tags>lawyer</tags>
+    <tags>customer</tags>
+</addressbook>
