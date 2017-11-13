@@ -9,33 +9,30 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
+=== Jonatan Aleksi Juhani Lehtinen
+image::joppeel.png[width="150", align="left"]
+{empty}[https://cs2103aug2017-t12-b3.github.io/main/team/joppeel.html[Project Portfolio]]
 
+Role: Developer +
+Responsibilities: In charge of model and storage
 
 '''
 
 === Ruchir Aggarwal
 image::aggarwalRuchir.png[width="150", align="left"]
-{empty}[https://github.com/aggarwalRuchir[github]]
+{empty}[https://cs2103aug2017-t12-b3.github.io/main/team/aggarwalRuchir.html[Project Portfolio]]
 
 Role: Developer +
 Responsibilities: In charge of logic
 
 '''
 
-=== Shi Jing Wong
+=== Wong Shi Jing
 image::wshijing.png[width="150", align="left"]
-{empty}[https://github.com/wshijing[github]]
+{empty}[https://cs2103aug2017-t12-b3.github.io/main/team/wshijing.html[Project Portfolio]]
 
 Role: Developer +
 Responsibilities: In charge of UI
 
 '''
 
-=== Jonatan Lehtinen
-image::joppeel.png[width="150", align="left"]
-{empty}[http://github.com/joppeel[github]]
-
-Role: Developer +
-Responsibilities: In charge of model and storage
-
-'''
