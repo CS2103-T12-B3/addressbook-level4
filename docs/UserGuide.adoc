@@ -235,8 +235,9 @@ The `redo` command fails as there are no `undo` commands executed previously.
 === Loading pre-existing address book : `load`
 
 Loads pre-existing address book to current address book. The pre-existing +
-address book has to be in xml-format and it has to be in the data folder +
-with a different name than the current address book.
+address book has to be in xml-format and it has to be in the folder called "data" +
+unless defined differently in the user preferences. The file also has to have +
+a different name than the current address book.
 
 Format: `load FILENAME`
 
