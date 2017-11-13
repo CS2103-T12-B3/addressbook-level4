@@ -42,7 +42,6 @@ public class MapsPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-
     private void loadPersonPage(ReadOnlyPerson person) {
         loadPage(MAPS_DIR_URL_PREFIX + MAPS_DEFAULT_ORIGIN + MAPS_DEST_PREFIX
                 + person.getAddress().value.replaceAll(" ", "+"));
@@ -56,8 +55,8 @@ public class MapsPanel extends UiPart<Region> {
      * Loads a default HTML file with a background that matches the general theme.
      */
     private void loadDefaultPage() {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        loadPage(defaultPage.toExternalForm());
+        //URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
+        loadPage(MAPS_DIR_URL_PREFIX);
     }
 
     /**

@@ -42,6 +42,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private MapsPanel mapsPanel;
     private PersonListPanel personListPanel;
+    private PersonDetailsCard personDetailsCard;
     private Config config;
     private UserPrefs prefs;
 
@@ -62,6 +63,9 @@ public class MainWindow extends UiPart<Region> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane personDetailsPanelHolder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML);
@@ -123,9 +127,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
 
-    //@@author aggarwalRuchir
+    //@@author aggarwalRuchir-unused
     /**
-     * Opens the help window.
+     * Opens the Login window.
      */
     @FXML
     public void handleLogin() {
@@ -141,6 +145,9 @@ public class MainWindow extends UiPart<Region> {
     void fillInnerParts() {
         mapsPanel = new MapsPanel();
         mapsPlaceholder.getChildren().add(mapsPanel.getRoot());
+
+        personDetailsCard = new PersonDetailsCard(logic.getFilteredPersonList());
+        personDetailsPanelHolder.getChildren().add(personDetailsCard.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());

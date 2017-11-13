@@ -271,6 +271,17 @@ Example :
 `mypassword` (you are also asked to confirm the password)
 // end::lockAddressbook[]
 
+// tag::updateUI[]
+=== Cleaner UI
+
+`Coming in v2.0` +
+Give the user a better experience through a much cleaner UI. The person's details will not be on the card, but on a +
+seperate panel on the side which makes the details much easier to look. The images are also shaped in the form a +
+circle so that it looks much elegant.
+// end::updateUI[]
+
+
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
