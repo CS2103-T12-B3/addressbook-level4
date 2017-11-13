@@ -104,7 +104,7 @@ Undo success!
 ---
 `add n/John Doe p/90042345 e/johnd@example.com a/468A, Admiralty Drive, #06-127 b/19/12/1999 pt/johnD.txt` +
 ```
-Person's photo should be in format: nameOfFile.png
+Person's photo should be in format: nameOfFile.png/nameOfFile.jpg/nameOfFile.gif/nameOfFile.bmp
 ```
 
 ---
@@ -256,7 +256,7 @@ Example: find alice bob charlie
 ```
 
 ---
-`find 1` +
+`find Peter` +
 ```
 0 persons listed!
 ```
