@@ -6,7 +6,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 == Project: People.connect - Level 4
 People.connect is a desktop address book application. This application allows users to store important information about the people they care about. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 
-*Code contributed*: [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/aggarwalRuchir.md[Functional code]] [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/aggarwalRuchir.md[Test code]]
+*Code contributed*: [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/aggarwalRuchir.md[Functional code]] [https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/aggarwalRuchir.md[Test code]] [https://github.com/aggarwalRuchir/addressbook-level4/blob/ReworkUI/collated/unused/aggarwalRuchir-unused.md[Unused code]]
 
 === Enhancement Added: list by tag
 
@@ -90,6 +90,29 @@ include::../UserGuide.adoc[tag=lockaddressbook]
 Since the app has a feature of hiding certain fields about a person, if the addressbook is not locked, any person can access those +
 details using 'viewall' command which would leave the point of hiding details useless. Hence, adding a level of security +
 will be a good feature to implement.
+
+=== Enhancement Proposed: Update GUI
+
+=== External Behaviour
+
+---
+
+#Start of Extract [from: User Guide]#
+
+include::../UserGuide.adoc[tag=updateGUI]
+
+#End of Extract#
+
+---
+
+==== Justification
+
+People.Connect is targeted for businessmen. So a simple yet elegant user interface will attract more users. The user +
+should not strain himself to lok at the details of the person and that's why it is intended that we remove the details +
+from person card and add a separate pane where all the details can be shown with much larger size making it easier +
+for the user to se ethe data without any stress. The theme is not bright but dark with subtle mix of blue added through+
+google maps which complements the overall look of the app. Also, the image of the person is intended to be shown in a +
+circular shape rather than a square.
 
 === Other contributions
 
