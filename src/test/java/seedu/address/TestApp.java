@@ -35,6 +35,7 @@ public class TestApp extends MainApp {
     protected static final String ADDRESS_BOOK_NAME = "Test";
     protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
+    protected final String testLoadFilePath = "./src/test/data/LoadCommandTest/";
 
     public TestApp() {
     }
@@ -67,6 +68,7 @@ public class TestApp extends MainApp {
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
         userPrefs.setAddressBookFilePath(saveFileLocation);
         userPrefs.setAddressBookName(ADDRESS_BOOK_NAME);
+        userPrefs.setFilePath(testLoadFilePath);
         return userPrefs;
     }
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>Alice Pauline</name>
+        <phone>85355255</phone>
+        <email>alice@example.com</email>
+        <address>123, Jurong West Ave 6, #08-111</address>
+        <birthday>13/12/2001</birthday>
+        <photo>AlicePauline.jpg</photo>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Benson Meier</name>
+        <phone>98765432</phone>
+        <email>johnd@example.com</email>
+        <address>311, Clementi Ave 2, #02-25</address>
+        <birthday>03/02/2011</birthday>
+        <photo>BensonMeier.jpg</photo>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Carl Kurz</name>
+        <phone>95352563</phone>
+        <email>heinz@example.com</email>
+        <address>wall street</address>
+        <birthday>09/06/1993</birthday>
+        <photo>Carl.jpg</photo>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Daniel Meier</name>
+        <phone>87652533</phone>
+        <email>cornelia@example.com</email>
+        <address>10th street</address>
+        <birthday>01/09/1992</birthday>
+        <photo>DanMeier.jpg</photo>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Elle Meyer</name>
+        <phone>9482224</phone>
+        <email>werner@example.com</email>
+        <address>michegan ave</address>
+        <birthday>28/02/1995</birthday>
+        <photo>ElMeyer.jpg</photo>
+    </persons>
+    <persons>
+        <name>Fiona Kunz</name>
+        <phone>9482427</phone>
+        <email>lydia@example.com</email>
+        <address>little tokyo</address>
+        <birthday>24/12/1994</birthday>
+        <photo>KunzFiona.jpg</photo>
+        <tagged>family</tagged>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>George Best</name>
+        <phone>9482442</phone>
+        <email>anna@example.com</email>
+        <address>4th street</address>
+        <birthday>31/12/1999</birthday>
+        <photo>GBest.jpg</photo>
+        <tagged>family</tagged>
+        <tagged>friends</tagged>
+    </persons>
+    <tags>owesMoney</tags>
+    <tags>family</tags>
+    <tags>friends</tags>
+    <tags>friend</tags>
+    <tags>husband</tags>
+</addressbook>

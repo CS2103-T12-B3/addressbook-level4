@@ -1,66 +1,33 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.address.logic.commands.LoadCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.storage.XmlAddressBookStorage;
 
 public class LoadCommandSystemTest extends AddressBookSystemTest {
 
-    private static String testFileName = "sampleDataForTheTests.xml";
-    private static Path destination = Paths.get("data/" + testFileName);
-
-    @BeforeClass
-    public static void createTestFile() throws Exception {
-        new File(destination.toString());
-    }
-
-    @AfterClass
-    public static void deleteTestFile() throws Exception {
-        Files.delete(destination);
-    }
+    private final String totallyNewContactsFileName = "testLoadTotallyNew.xml";
 
     @Test
     public void load_success() throws Exception {
 
-        ArrayList newPersons = new ArrayList<>(Arrays.asList(AMY, BOB));
-        addInfoToTestFile(newPersons);
-        String command = LoadCommand.COMMAND_WORD + " " + testFileName;
+        List<ReadOnlyPerson> newPersons = getTypicalPersons();
+        String command = LoadCommand.COMMAND_WORD + " " + totallyNewContactsFileName;
 
         // try to load new address book, should load new persons
         assertCommandSuccess(command, newPersons);
 
-        // try to load the same address book again, shouldn't add new persons
+        //try to load the same address book again, shouldn't add new persons
         assertCommandSuccess(command, new ArrayList());
-
-        deleteTestFile();
-        createTestFile();
-
-        ArrayList partiallyNewPersons = new ArrayList<>(Arrays.asList(AMY, ALICE));
-        addInfoToTestFile(partiallyNewPersons);
-
-        // try to load partially new persons, AMY is already in the address book
-        assertCommandSuccess(command, new ArrayList(Arrays.asList(ALICE)));
 
     }
 
@@ -74,34 +41,6 @@ public class LoadCommandSystemTest extends AddressBookSystemTest {
         // test without giving any parameters
         command = LoadCommand.COMMAND_WORD;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
-    }
-
-    /**
-     * Creates new xml file, adds contacts from {@code addressBook} to the test file
-     */
-    public void addTestDataToFile(ReadOnlyAddressBook addressBook) throws Exception {
-        XmlAddressBookStorage storage = new XmlAddressBookStorage(destination.toString());
-        storage.saveAddressBook(addressBook, destination.toString());
-    }
-
-    /**
-     * Creates a new instance of address book and adds contacts from {@code personsToAdd}
-     */
-    public AddressBook createAddressBook(List<ReadOnlyPerson> personsToAdd) throws Exception {
-        AddressBook addressBook = new AddressBook();
-
-        for (ReadOnlyPerson person : personsToAdd) {
-            addressBook.addPerson(person);
-        }
-        return addressBook;
-    }
-
-    /**
-     * Adds {@code personToAdd} to an XML file
-     */
-    public void addInfoToTestFile(List<ReadOnlyPerson> personsToAdd) throws Exception {
-        AddressBook addressBook = createAddressBook(personsToAdd);
-        addTestDataToFile(addressBook);
     }
 
     /**

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>Fiona Kunz</name>
+        <phone>9482427</phone>
+        <email>lydia@example.com</email>
+        <address>little tokyo</address>
+        <birthday>24/12/1994</birthday>
+        <photo>KunzFiona.jpg</photo>
+        <tagged>family</tagged>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>George Best</name>
+        <phone>9482442</phone>
+        <email>anna@example.com</email>
+        <address>4th street</address>
+        <birthday>31/12/1999</birthday>
+        <photo>GBest.jpg</photo>
+        <tagged>family</tagged>
+        <tagged>friends</tagged>
+    </persons>
+    <persons>
+        <name>Amy Bee</name>
+        <phone>11111111</phone>
+        <email>amy@example.com</email>
+        <address>Block 312, Amy Street 1</address>
+        <birthday>03/11/2001</birthday>
+        <photo>Amy.jpg</photo>
+        <tagged>friend</tagged>
+    </persons>
+    <persons>
+        <name>Bob Choo</name>
+        <phone>22222222</phone>
+        <email>bob@example.com</email>
+        <address>Block 123, Bobby Street 3</address>
+        <birthday>11/07/1993</birthday>
+        <photo>bob.jpg</photo>
+        <tagged>friends</tagged>
+    </persons>
+    <tags>owesMoney</tags>
+    <tags>friends</tags>
+    <tags>family</tags>
+    <tags>friend</tags>
+</addressbook>

@@ -135,7 +135,7 @@ public class LocateCommandTest {
      */
     private LocateCommand prepareCommand(Index index) {
         LocateCommand locateCommand = new LocateCommand(index);
-        locateCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        locateCommand.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
         return locateCommand;
     }
 

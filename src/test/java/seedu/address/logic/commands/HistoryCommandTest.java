@@ -9,6 +9,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 
 public class HistoryCommandTest {
     private HistoryCommand historyCommand;
@@ -17,9 +18,10 @@ public class HistoryCommandTest {
     @Before
     public void setUp() {
         Model model = new ModelManager();
+        UserPrefs userPrefs = new UserPrefs();
         history = new CommandHistory();
         historyCommand = new HistoryCommand();
-        historyCommand.setData(model, history, new UndoRedoStack());
+        historyCommand.setData(model, userPrefs, history, new UndoRedoStack());
     }
 
     @Test

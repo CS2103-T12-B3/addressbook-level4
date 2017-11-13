@@ -49,7 +49,7 @@ public class AddCommandIntegrationTest {
      */
     private AddCommand prepareCommand(Person person, Model model) {
         AddCommand command = new AddCommand(person);
-        command.setData(model, new CommandHistory(), new UndoRedoStack());
+        command.setData(model, new UserPrefs(), new CommandHistory(), new UndoRedoStack());
         return command;
     }
 }
