@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FxViewUtil;
 
-
 /**
  * Controller for a login dialogue
  */
