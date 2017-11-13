@@ -3,7 +3,7 @@ ifdef::env-github,env-browser[:outfilesuffix: .adoc]
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== Project: People.connect - Level 4
+== People.Connect
 People.connect is a desktop address book application. This application is catered to meet the requirements of a +
 businessman who wants to keep his business contacts at the same place and then access them quickly and efficiently. It +
 has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
