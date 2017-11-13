@@ -1,0 +1,329 @@
+= People.connect - Test Script
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+:repoURL: https://github.com/CS2103AUG2017-T12-B3/main.git
+
+Legend:
+`INPUTS` command to type (e.g. *locate 1* means to execute `locate 1` in the command box) +
+```
+Expected results are contained here
+```
+=== Set up
+
+. Download all documents (all the test files and guides) uploaded on v1.5 release. +
+. Create a new folder named ‘people.connect` and place downloaded .jar file in it +
+. Place the downloaded test documents in a newly created `data` folder +
+. Create a path `src/main/resources/` in the `people.connect` folder +
+. Create a folder `person_photos` in the current path `.../people.connect/src/main/resources/` +
+. Place the downloaded images provided into `person_photos` folder +
+. Launch the application
+
+
+=== Add
+
+`add` +
+```
+Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]...
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993 pt/johnD.jpg t/friends t/owesMoney
+```
+
+---
+
+`add n/John` +
+```
+Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]...
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993 pt/johnD.jpg t/friends t/owesMoney
+```
+
+---
+
+`add n/John p/90042345` +
+```
+Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]...
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993 pt/johnD.jpg t/friends t/owesMoney
+```
+
+---
+
+`add n/John p/90042345` +
+```
+Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]...
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993 pt/johnD.jpg t/friends t/owesMoney
+```
+
+---
+
+`add n/John p/90042345 e/johnD@example.com` +
+```
+Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]...
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993 pt/johnD.jpg t/friends t/owesMoney
+```
+
+---
+
+`add n/John p/90042345 e/johnD@example.com a/468A, Admiralty Drive, #06-127` +
+```
+Invalid command format!
+add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS b/BIRTHDAY [pt/PHOTO] [t/TAG]...
+Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/21/12/1993 pt/johnD.jpg t/friends t/owesMoney
+```
+
+---
+`add n/John Doe p/90042345 e/johnd@example.com a/468A, Admiralty Drive, #06-127 b/99/99/1999` +
+```
+Person's birthday should be in format: DD/MM/YYYY and the date should be valid.
+```
+
+---
+
+`add n/John p/90042345 e/johnD@example.com a/468A, Admiralty Drive, #06-127 b/19/12/1999` +
+```
+New person added: John Phone: 9004-2345 Email: johnD@example.com Address: 468A, Admiralty Drive, #06-127 Birthday: 19/12/1999 Photo: template.png Tags:
+```
+
+---
+`undo`
+```
+Undo success!
+```
+
+---
+`add n/John Doe p/90042345 e/johnd@example.com a/468A, Admiralty Drive, #06-127 b/19/12/1999 pt/johnD.txt` +
+```
+Person's photo should be in format: nameOfFile.png
+```
+
+---
+`add n/John Doe p/90042345 e/johnd@example.com a/468A, Admiralty Drive, #06-127 b/19/12/1999 pt/johnD.png t/friends` +
+```
+New person added: John Doe Phone: 9004-2345 Email: johnd@example.com Address: 468A, Admiralty Drive, #06-127 Birthday: 19/12/1999 Photo: johnD.png Tags: [friends]
+```
+
+---
+`undo`
+```
+Undo success!
+```
+
+---
+`redo`
+```
+Redo success!
+```
+
+=== Edit
+
+`edit` +
+```
+Invalid command format!
+edit: Edits the details of the person identified by the index number used in the last person listing. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [pt/PHOTO] [t/TAG]...
+Example: edit 1 p/91234567 e/johndoe@example.com
+```
+
+---
+`edit john` +
+```
+Invalid command format!
+edit: Edits the details of the person identified by the index number used in the last person listing. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [pt/PHOTO] [t/TAG]...
+Example: edit 1 p/91234567 e/johndoe@example.com
+```
+
+---
+`edit 20 n/Jane` +
+```
+The person index provided is invalid
+```
+
+---
+`edit 1 n/Rowan Atkinson` +
+```
+Edited Person: Rowan Atkinson Phone: 176-5371-6262 Email: bpitt@gmail.com Address: 132, Beverly Hills, #02-145 Birthday: 01/12/1975 Photo: BradPitt.jpg Tags: [celebrity]
+```
+
+---
+`edit 1 p/92341666` +
+```
+Edited Person: Rowan Atkinson Phone: 9234-1666 Email: bpitt@gmail.com Address: 132, Beverly Hills, #02-145 Birthday: 01/12/1975 Photo: BradPitt.jpg Tags: [celebrity]
+```
+
+---
+`edit 1 e/rowanA@example.com` +
+```
+Edited Person: Rowan Atkinson Phone: 9234-1666 Email: rowanA@example.com Address: 132, Beverly Hills, #02-145 Birthday: 01/12/1975 Photo: BradPitt.jpg Tags: [celebrity]
+```
+
+---
+`edit 1 a/426, Ang Mo Kio Ave 3, #11-123` +
+```
+Edited Person: Rowan Atkinson Phone: 9234-1666 Email: rowanA@example.com Address: 426, Ang Mo Kio Ave 3, #11-123 Birthday: 01/12/1975 Photo: BradPitt.jpg Tags: [celebrity]
+```
+
+---
+`edit 1 b/06/01/1955` +
+```
+Edited Person: Rowan Atkinson Phone: 9234-1666 Email: rowanA@example.com Address: 426, Ang Mo Kio Ave 3, #11-123 Birthday: 06/01/1955 Photo: BradPitt.jpg Tags: [celebrity]
+```
+
+---
+`edit 1 pt/RowanAtkinsonNew.jpg` +
+```
+Edited Person: Rowan Atkinson Phone: 9234-1666 Email: rowanA@example.com Address: 426, Ang Mo Kio Ave 3, #11-123 Birthday: 06/01/1955 Photo: RowanAtkinsonNew.jpg Tags: [celebrity]
+```
+
+---
+`edit 1 t/celebrity t/friends` +
+```
+Edited Person: Rowan Atkinson Phone: 9234-1666 Email: rowanA@example.com Address: 426, Ang Mo Kio Ave 3, #11-123 Birthday: 06/01/1955 Photo: RowanAtkinsonNew.jpg Tags: [celebrity][friends]
+```
+
+=== Delete
+
+`delete` +
+```
+Invalid command format!
+delete: Deletes the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: delete 1
+```
+
+---
+`delete John` +
+```
+Invalid command format!
+delete: Deletes the person identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: delete 1
+```
+
+---
+`delete 11` +
+```
+The person index provided is invalid
+```
+
+---
+`delete 10` +
+```
+Deleted Person: John Doe Phone: 9004-2345 Email: johnd@example.com Address: 468A, Admiralty Drive, #06-127 Birthday: 19/12/1999 Photo: johnD.png Tags: [friends]
+```
+
+=== Load
+
+`load` +
+```
+Invalid command format!
+load: Loads contacts from a pre-existing address book to the current one. The pre-existing address book's name is given as a parameter.
+Parameters: FILENAME
+Example: load myaddressbook.xml
+```
+
+---
+`load newAddressbook.txt` +
+```
+The address book couldn't be read. Make sure your file is in the right directory and that it's in the correct format.
+```
+
+---
+`load newAddressbook.xml` +
+```
+Successfully loaded the address book.
+```
+
+=== Find
+
+`find` +
+```
+Invalid command format!
+find: Finds all persons whose names contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
+Parameters: KEYWORD [MORE_KEYWORDS]...
+Example: find alice bob charlie
+```
+
+---
+`find 1` +
+```
+0 persons listed!
+```
+
+---
+`list`
+```
+Listed all persons
+```
+
+---
+`find John` +
+```
+1 persons listed!
+```
+
+---
+`list`
+```
+Listed all persons
+```
+
+=== List by tags
+
+---
+`list`
+```
+Listed all persons
+```
+
+---
+`list t/1` +
+```
+No person with given tags found.
+```
+
+---
+`list t/friends` +
+```
+Listed all persons
+```
+
+=== Sort
+
+`sort` +
+```
+Sorted all persons
+```
+
+=== Locate
+
+`locate` +
+```
+Invalid command format!
+locate: Locates the person address identified by the index number used in the last person listing.
+Parameters: INDEX (must be a positive integer)
+Example: locate 1
+```
+
+---
+`locate 11` +
+```
+The person index provided is invalid
+```
+
+---
+`locate 1` +
+```
+Located Person: 1
+```
