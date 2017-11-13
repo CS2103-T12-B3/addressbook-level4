@@ -384,7 +384,7 @@ The following activity diagram shows what happens when a user executes a new lis
 
 image::ListCommandActivityDiagram.png[width="400"]
 
-=== Design Considerations
+==== Design Considerations
 
 **Aspect:** Implementation of `ListCommand` +
 **Alternative 1 (current choice):** Add a new class ListCommandParser +
