@@ -127,7 +127,7 @@ public class MainWindow extends UiPart<Region> {
     }
 
 
-    //@@author aggarwalRuchir
+    //@@author aggarwalRuchir-unused
     /**
      * Opens the Login window.
      */

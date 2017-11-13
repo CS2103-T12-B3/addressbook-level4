@@ -1,4 +1,4 @@
-//@@author aggarwalRuchir
+//@@author aggarwalRuchir-unused
 package seedu.address.ui;
 
 import java.util.logging.Logger;
