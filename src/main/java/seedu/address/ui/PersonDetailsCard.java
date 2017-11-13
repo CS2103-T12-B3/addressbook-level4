@@ -1,4 +1,4 @@
-//@@author aggarwalRuchir
+//@@author aggarwalRuchir-unused
 package seedu.address.ui;
 
 import java.io.File;
@@ -23,7 +23,6 @@ import javafx.scene.shape.Circle;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.ReadOnlyPerson;
 
 public class PersonDetailsCard extends UiPart<Region> {

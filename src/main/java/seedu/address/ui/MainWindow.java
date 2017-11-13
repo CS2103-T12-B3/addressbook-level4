@@ -42,7 +42,7 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private MapsPanel mapsPanel;
     private PersonListPanel personListPanel;
-    private PersonDetailsCard personDetailsPanel;
+    private PersonDetailsCard personDetailsCard;
     private Config config;
     private UserPrefs prefs;
 
@@ -146,8 +146,8 @@ public class MainWindow extends UiPart<Region> {
         mapsPanel = new MapsPanel();
         mapsPlaceholder.getChildren().add(mapsPanel.getRoot());
 
-        personDetailsPanel = new PersonDetailsCard(logic.getFilteredPersonList());
-        personDetailsPanelHolder.getChildren().add(personDetailsPanel.getRoot());
+        personDetailsCard = new PersonDetailsCard(logic.getFilteredPersonList());
+        personDetailsPanelHolder.getChildren().add(personDetailsCard.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
