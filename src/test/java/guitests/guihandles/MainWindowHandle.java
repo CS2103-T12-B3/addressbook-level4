@@ -45,6 +45,7 @@ public class MainWindowHandle extends StageHandle {
         return mainMenu;
     }
 
+    //@@author wshijing
     public MapsPanelHandle getMapsPanel() {
         return mapsPanel;
     }

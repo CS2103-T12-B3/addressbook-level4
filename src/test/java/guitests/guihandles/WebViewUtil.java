@@ -22,6 +22,7 @@ public class WebViewUtil {
         }
     }
 
+    //@@author wshijing
     /**
      * If the {@code mapsPanelHandle}'s {@code WebView} is loading, sleeps the thread till it is successfully loaded.
      */

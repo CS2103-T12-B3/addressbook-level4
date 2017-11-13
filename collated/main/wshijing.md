@@ -1,51 +1,111 @@
 # wshijing
-###### \java\seedu\address\logic\commands\SortCommand.java
+###### \java\seedu\address\logic\commands\EditCommand.java
+``` java
+        public void setPhoto(Photo photo) {
+            this.photo = photo;
+        }
+```
+###### \java\seedu\address\logic\commands\LocateCommand.java
 ``` java
 package seedu.address.logic.commands;
 
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import java.util.List;
+
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.ReadOnlyPerson;
 
 /**
- * Sort all persons in address book.
+ * Locates a person address identified using it's last displayed index from the address book.
  */
-public class SortCommand extends Command {
+public class LocateCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_WORD = "locate";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Locates the person address identified by the index number used in the last person listing.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
+
+    public static final String MESSAGE_LOCATE_PERSON_SUCCESS = "Located Person: %1$s";
+
+    private final Index targetIndex;
+
+    public LocateCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+    }
 
     @Override
-    public CommandResult execute() {
-        model.sortPersonList();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+    public CommandResult execute() throws CommandException {
+
+        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        return new CommandResult(String.format(MESSAGE_LOCATE_PERSON_SUCCESS, targetIndex.getOneBased()));
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LocateCommand // instanceof handles nulls
+                && this.targetIndex.equals(((LocateCommand) other).targetIndex)); // state check
     }
 }
 ```
-###### \java\seedu\address\logic\parser\ParserUtil.java
+###### \java\seedu\address\logic\parser\LocateCommandParser.java
 ``` java
+package seedu.address.logic.parser;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.LocateCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input arguments and creates a new LocateCommand object
+ */
+public class LocateCommandParser implements Parser<LocateCommand> {
+
     /**
-     * Parses a {@code Optional<String> photo} into an {@code Optional<Photo>} if {@code photo} is present.
-     * See header comment of this class regarding the use of {@code Optional} parameters.
+     * Parses the given {@code String} of arguments in the context of the LocateCommand
+     * and returns an LocateCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
      */
-    public static Optional<Photo> parsePhoto(Optional<String> photo) throws IllegalValueException {
-        requireNonNull(photo);
-        return photo.isPresent() ? Optional.of(new Photo(photo.get())) : Optional.empty();
+    public LocateCommand parse(String args) throws ParseException {
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new LocateCommand(index);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, LocateCommand.MESSAGE_USAGE));
+        }
     }
+}
 ```
-###### \java\seedu\address\model\AddressBook.java
+###### \java\seedu\address\model\person\Person.java
 ``` java
-    /**
-     * Sort person list in the address book
-     */
-    public void sortPersonList() {
-        persons.sort();
+    public void setPhoto(Photo photo) {
+        this.photo.set(requireNonNull(photo));
     }
-```
-###### \java\seedu\address\model\ModelManager.java
-``` java
-    public void sortPersonList() {
-        addressBook.sortPersonList();
+
+    @Override
+    public ObjectProperty<Photo> photoProperty() {
+        return photo;
+    }
+
+    @Override
+    public Photo getPhoto() {
+        return photo.get();
     }
 ```
 ###### \java\seedu\address\model\person\Photo.java
@@ -53,6 +113,8 @@ public class SortCommand extends Command {
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+
+import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -75,17 +137,21 @@ public class Photo {
     private String defaultPhoto = "template.png";
 
     /**
-     * Validates given photo.
+     * Validates given photo. If the parameter {@code photoDir} is Empty, uses the default photo.
      *
      * @throws IllegalValueException if given photo address string is invalid.
      */
-    public Photo(String photoDir) throws IllegalValueException {
+    public Photo(Optional<String> photoDir) throws IllegalValueException {
         requireNonNull(photoDir);
-        String trimmedPhoto = photoDir.trim();
-        if (!isValidPhoto(trimmedPhoto)) {
-            throw new IllegalValueException(MESSAGE_PHOTO_CONSTRAINTS);
+        if (photoDir.isPresent()) {
+            String trimmedPhoto = photoDir.get().trim();
+            if (!isValidPhoto(trimmedPhoto)) {
+                throw new IllegalValueException(MESSAGE_PHOTO_CONSTRAINTS);
+            }
+            this.photoDir = trimmedPhoto;
+        } else {
+            this.photoDir = defaultPhoto;
         }
-        this.photoDir = trimmedPhoto;
     }
 
     public String getPhotoDir() {
@@ -126,64 +192,81 @@ public class Photo {
 
 }
 ```
-###### \java\seedu\address\model\person\UniquePersonList.java
+###### \java\seedu\address\ui\MapsPanel.java
 ``` java
-    /**
-     * Sort list by name
-     */
-    public void sort() {
-        Collections.sort(internalList, Comparator.comparing(firstPerson -> firstPerson.getName().fullName.replaceFirst(
-                "[a-z]{1}", firstPerson.getName().fullName.substring(0, 1).toUpperCase())));
+package seedu.address.ui;
+
+import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
+
+import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.layout.Region;
+import javafx.scene.web.WebView;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.model.person.ReadOnlyPerson;
+
+/**
+ * The Maps Panel of the App.
+ */
+public class MapsPanel extends UiPart<Region> {
+
+    public static final String DEFAULT_PAGE = "default.html";
+    public static final String MAPS_DIR_URL_PREFIX = "https://www.google.com/maps/dir/?api=1";
+    public static final String MAPS_DEFAULT_ORIGIN = "&origin=My+Location";
+    public static final String MAPS_DEST_PREFIX = "&destination=";
+    public static final String MAPS_SEARCH_ORIGIN = "&query=My+Location";
+    public static final String MAPS_SEARCH_URL_PREFIX = "https://www.google.com/maps/search/?api=1";
+    public static final String MAPS_SEARCH_URL_SUFFIX = "&dg=dbrw&newdg=1";
+
+    private static final String FXML = "MapsPanel.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
+
+    @FXML
+    private WebView maps;
+
+    public MapsPanel() {
+        super(FXML);
+
+        // To prevent triggering events for typing inside the loaded Web page.
+        getRoot().setOnKeyPressed(Event::consume);
+
+        loadDefaultPage();
+        registerAsAnEventHandler(this);
+    }
+
+
+    private void loadPersonPage(ReadOnlyPerson person) {
+        loadPage(MAPS_DIR_URL_PREFIX + MAPS_DEFAULT_ORIGIN + MAPS_DEST_PREFIX
+                + person.getAddress().value.replaceAll(" ", "+") + MAPS_SEARCH_URL_SUFFIX);
+    }
+
+    public void loadPage(String url) {
+        Platform.runLater(() -> maps.getEngine().load(url));
     }
 
     /**
-     * Removes the equivalent person from the list.
-     *
-     * @throws PersonNotFoundException if no such person could be found in the list.
+     * Loads a default HTML file with a background that matches the general theme.
      */
-    public boolean remove(ReadOnlyPerson toRemove) throws PersonNotFoundException {
-        requireNonNull(toRemove);
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
-        if (!personFoundAndDeleted) {
-            throw new PersonNotFoundException();
-        }
-        return personFoundAndDeleted;
-    }
-
-    public void setPersons(UniquePersonList replacement) {
-        this.internalList.setAll(replacement.internalList);
-    }
-
-    public void setPersons(List<? extends ReadOnlyPerson> persons) throws DuplicatePersonException {
-        final UniquePersonList replacement = new UniquePersonList();
-        for (final ReadOnlyPerson person : persons) {
-            replacement.add(new Person(person));
-        }
-        setPersons(replacement);
+    private void loadDefaultPage() {
+        loadPage(MAPS_SEARCH_URL_PREFIX + MAPS_SEARCH_ORIGIN + MAPS_SEARCH_URL_SUFFIX);
     }
 
     /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     * Frees resources allocated to the maps.
      */
-    public ObservableList<ReadOnlyPerson> asObservableList() {
-        return FXCollections.unmodifiableObservableList(mappedList);
+    public void freeResources() {
+        maps = null;
     }
 
-    @Override
-    public Iterator<Person> iterator() {
-        return internalList.iterator();
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && this.internalList.equals(((UniquePersonList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
+    @Subscribe
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadPersonPage(event.getNewSelection().person);
     }
 }
 ```
@@ -217,4 +300,15 @@ public class Photo {
         }
     }
 
+```
+###### \resources\view\MapsPanel.fxml
+``` fxml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.web.WebView?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1">
+    <WebView fx:id="maps"/>
+</StackPane>
 ```

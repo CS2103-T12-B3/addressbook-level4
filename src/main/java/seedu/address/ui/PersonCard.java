@@ -65,6 +65,7 @@ public class PersonCard extends UiPart<Region> {
         initPhoto(person);
     }
 
+    //@@author wshijing-reused
     private static String getColorForTag(String tagValue) {
         if (!tagColors.containsKey(tagValue)) {
             tagColors.put(tagValue, colors[random.nextInt(colors.length)]);
@@ -88,6 +89,7 @@ public class PersonCard extends UiPart<Region> {
         });
     }
 
+    //@@author wshijing
     /**
      * Initialise each image and assign a person a photo
      */
@@ -116,6 +118,7 @@ public class PersonCard extends UiPart<Region> {
         }
     }
 
+    //@@author wshijing-reused
     /**
      * Initialise each tag and assign a unique color
      */

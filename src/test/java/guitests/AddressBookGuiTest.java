@@ -79,6 +79,7 @@ public abstract class AddressBookGuiTest {
         return mainWindowHandle.getMainMenu();
     }
 
+    //@@author wshijing
     protected MapsPanelHandle getMapsPanel() {
         return mainWindowHandle.getMapsPanel();
     }

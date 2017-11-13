@@ -204,6 +204,7 @@ public class EditCommand extends UndoableCommand {
             return Optional.ofNullable(birthday);
         }
 
+        //@@author wshijing
         public void setPhoto(Photo photo) {
             this.photo = photo;
         }

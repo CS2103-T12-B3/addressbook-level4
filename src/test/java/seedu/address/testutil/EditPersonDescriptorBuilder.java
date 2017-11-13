@@ -97,6 +97,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    //@@author wshijing
     /**
      * Sets the {@code Photo} of the {@code EditPersonDescriptor} that we are building.
      */

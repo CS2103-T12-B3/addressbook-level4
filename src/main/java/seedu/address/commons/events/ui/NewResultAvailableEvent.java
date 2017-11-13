@@ -10,6 +10,7 @@ public class NewResultAvailableEvent extends BaseEvent {
     public final String message;
     public final boolean isError;
 
+    //@@author wshijing-reused
     public NewResultAvailableEvent(String message, boolean isError) {
         this.message = message;
         this.isError = isError;
