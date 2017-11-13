@@ -19,7 +19,9 @@
 <h2 id="project-people-connect"><a class="link" href="#project-people-connect">Project: People.connect</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>People.connect is a desktop address book application used to allow people to store important information about those they care for. The user interacts with it using a CLI, and it has a GUI created although most user interactions happen using a command line interface where minimal mouse usage is required.</p>
+<p>People.connect is a desktop address book application. This application is catered to meet the requirements of a<br>
+businessman who wants to keep his business contacts at the same place and then access them quickly and efficiently. It<br>
+has a GUI but most of the user interactions happen using a CLI (Command Line Interface).</p>
 </div>
 <div class="paragraph">
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/main/wshijing.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-T12-B3/main/blob/master/collated/test/wshijing.md">Test code</a>]</p>
@@ -160,6 +162,61 @@ When a sort command is executed, the sort command will conduct a sort on the cur
 </div>
 </div>
 <div class="sect2">
+<h3 id="enhancement-added-locate"><a class="link" href="#enhancement-added-locate">Enhancement Added: Locate</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p>A user has the address of each contact and the locate command could assist them to route from their current location to the chosen contacts address.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<hr>
+<div class="paragraph">
+<p>If we were to just locate the destination of the contacts address it would not benefit the user as much as routing the exact route the user could take from the origin to destination.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locate-mechanism"><a class="link" href="#locate-mechanism">Locate mechanism</a></h3>
+<div class="paragraph">
+<p>The locate mechanism is facilitated by an <code>PersonPanelSelectionChangedEvent</code> which resides in <code>Events</code>.<br>
+It supports locating an address on Google maps based on the person selected based on the index chosen.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the locate operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LocateCommandSequenceDiagram.png" alt="LocateCommandSequenceDiagram" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>LocateCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class LocateCommandParser<br>
+<strong>Pros:</strong> We will be able to provide arguments to locate a specific person<br>
+<strong>Cons:</strong> Hard for new developers to understand why we used <code>locate</code> command instead of using mouse to select a specific person.<br>
+<strong>Alternative 2:</strong> No locate command parser class<br>
+<strong>Pros:</strong> Easier for new developers to understand<br>
+<strong>Cons:</strong> Increase mouse usage instead of making full use of the Command Line Interface(CLI)</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
 <h3 id="enhancement-proposed-sort-by-birthday-command-code-sort-birthday-code"><a class="link" href="#enhancement-proposed-sort-by-birthday-command-code-sort-birthday-code">Enhancement Proposed: Sort by birthday command <code>sort birthday</code></a></h3>
 <div class="paragraph">
 <p>Currently, the sort function only sorts the name. We could allow the user to sort by birthday so that the user can see upcoming birthdays shown at the top of the list.</p>
@@ -169,6 +226,9 @@ When a sort command is executed, the sort command will conduct a sort on the cur
 <h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
 <div class="ulist">
 <ul>
+<li>
+<p>Change UI background to all black theme: [<a href="https://github.com/CS2103AUG2017-T12-B3/main/pull/66">#66</a>]</p>
+</li>
 <li>
 <p>Found bugs from another team&#8217;s product: [<a href="https://github.com/CS2103AUG2017-W13-B1/main/issues/91">#91</a>]</p>
 </li>
@@ -183,7 +243,7 @@ When a sort command is executed, the sort command will conduct a sort on the cur
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 12:54:58 +00:00
+Last updated 2017-11-13 13:42:47 +00:00
 </div>
 </div>
 </body>
