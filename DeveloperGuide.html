@@ -47,7 +47,7 @@
 <li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
 <li><a href="#sort-mechanism">3.2. Sort mechanism</a></li>
 <li><a href="#list-mechanism">3.3. List mechanism</a></li>
-<li><a href="#design-considerations-3">3.4. Design Considerations</a></li>
+<li><a href="#locate-mechanism">3.4. Locate mechanism</a></li>
 <li><a href="#logging">3.5. Logging</a></li>
 <li><a href="#birthday-attribute">3.6. Birthday attribute</a></li>
 <li><a href="#phone-attribute">3.7. Phone attribute</a></li>
@@ -437,7 +437,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>MapsPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -805,7 +805,7 @@ When a sort command is executed, the sort command will conduct a sort on the cur
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>SortCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Sort list by triggering an event to sort the current ObservableList&lt;ReadOnlyPerson&gt; person list.<br>
+<strong>Alternative 1 (current choice):</strong> Sort list by the sort command parser to sort the current ObservableList&lt;ReadOnlyPerson&gt; person list.<br>
 <strong>Pros:</strong> We will not make any changes to the current <code>internalList</code> thus will not affect any other commands that we have implemented.<br>
 <strong>Cons:</strong> Hard for new developers to understand the way we sort the read only person list.<br>
 <strong>Alternative 2:</strong> Just sort the <code>internalList</code><br>
@@ -836,9 +836,8 @@ It supports the listing of contacts which do not modify the addressbook(e.g. <co
 <img src="images/ListCommandActivityDiagram.png" alt="ListCommandActivityDiagram" width="400">
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4. Design Considerations</a></h3>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>ListCommand</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new class ListCommandParser<br>
@@ -847,6 +846,34 @@ It supports the listing of contacts which do not modify the addressbook(e.g. <co
 <strong>Alternative 2:</strong> No parser class<br>
 <strong>Pros:</strong> Easier for new developers to understand<br>
 <strong>Cons:</strong> All contacts are listed every time which may be an issue if user is trying to filter contacts by tags</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locate-mechanism"><a class="link" href="#locate-mechanism">3.4. Locate mechanism</a></h3>
+<div class="paragraph">
+<p>The locate mechanism is facilitated by an <code>PersonPanelSelectionChangedEvent</code> which resides in <code>Events</code>.<br>
+It supports locating an address on Google maps based on the person selected based on the index chosen.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the locate operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LocateCommandSequenceDiagram.png" alt="LocateCommandSequenceDiagram" width="800">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>LocateCommand</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class LocateCommandParser<br>
+<strong>Pros:</strong> We will be able to provide arguments to locate a specific person<br>
+<strong>Cons:</strong> Hard for new developers to understand why we used <code>locate</code> command instead of using mouse to select a specific person.<br>
+<strong>Alternative 2:</strong> No locate command parser class<br>
+<strong>Pros:</strong> Easier for new developers to understand<br>
+<strong>Cons:</strong> Increase mouse usage instead of making full use of the Command Line Interface(CLI)</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2446,7 +2473,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 12:24:40 +00:00
+Last updated 2017-11-13 12:29:15 +00:00
 </div>
 </div>
 </body>

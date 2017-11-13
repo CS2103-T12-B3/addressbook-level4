@@ -146,7 +146,7 @@ When a sort command is executed, the sort command will conduct a sort on the cur
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>SortCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Sort list by triggering an event to sort the current ObservableList&lt;ReadOnlyPerson&gt; person list.<br>
+<strong>Alternative 1 (current choice):</strong> Sort list by the sort command parser to sort the current ObservableList&lt;ReadOnlyPerson&gt; person list.<br>
 <strong>Pros:</strong> We will not make any changes to the current <code>internalList</code> thus will not affect any other commands that we have implemented.<br>
 <strong>Cons:</strong> Hard for new developers to understand the way we sort the read only person list.<br>
 <strong>Alternative 2:</strong> Just sort the <code>internalList</code><br>
@@ -183,7 +183,7 @@ When a sort command is executed, the sort command will conduct a sort on the cur
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 12:24:40 +00:00
+Last updated 2017-11-13 12:29:15 +00:00
 </div>
 </div>
 </body>
