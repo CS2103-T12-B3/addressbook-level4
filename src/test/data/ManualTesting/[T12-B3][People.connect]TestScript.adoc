@@ -296,7 +296,7 @@ No person with given tags found.
 ---
 `list t/friends` +
 ```
-Listed all persons
+Listed all persons with tag: [friends]
 ```
 
 === Sort
